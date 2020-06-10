@@ -1,0 +1,62 @@
+import React, {useState} from 'react';
+import { Modal,Form,DatePicker } from 'antd';
+import {TableListItem} from '../data';
+import ClassOption from "./ClassOption";
+
+const FormItem = Form.Item;
+
+export interface FormValueType extends Partial<TableListItem> {
+
+}
+
+interface CreateFormProps {
+  modalVisible: boolean;
+  onCancel: () => void;
+  onSubmit: (value: FormValueType) => void;
+}
+
+const CreateForm: React.FC<CreateFormProps> = (props) => {
+  const [formVals, setFormVals] = useState<FormValueType>({});
+  const [DateVals, setDateVals] = useState("");
+
+  // @ts-ignore
+  const { modalVisible, onCancel, onSubmit } = props;
+
+  const [form] = Form.useForm();
+
+  const submit = async () => {
+    const fieldsValue = await form.getFieldsValue();
+    // console.log(str)
+    setFormVals({...formVals , ...fieldsValue });
+    //console.log({ ...formVals,  ...fieldsValue,date: DateVals });
+    onSubmit({ ...formVals, ...fieldsValue, date: DateVals });
+  }
+
+  const formatDate = (date:any, dateString:any) => {
+    console.log(dateString);
+    setDateVals(dateString)
+  }
+
+  return (
+    <Modal
+      destroyOnClose
+      title="新增计划班次"
+      okText="确定"
+      cancelText="取消"
+      visible={modalVisible}
+      onCancel={() => onCancel()}
+      onOk={() => submit()}
+    >
+      <Form
+      form={form}
+      >
+        <ClassOption/>
+        <FormItem name="date" label="日期">
+          <DatePicker onChange={formatDate}/>
+        </FormItem>
+      </Form>
+    </Modal>
+  );
+};
+
+export default CreateForm;

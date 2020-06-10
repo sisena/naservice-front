@@ -1,0 +1,159 @@
+import React, {useEffect, useState} from 'react';
+import { Drawer, Tag,} from 'antd';
+import {
+  CheckCircleOutlined,
+  SyncOutlined,
+  ExclamationCircleOutlined,
+  ClockCircleOutlined,
+  CloseCircleOutlined
+} from '@ant-design/icons';
+import {getuserinfo} from '@/services/user';
+import ProTable, {ProColumns} from "@ant-design/pro-table";
+import {TableListItem} from "@/pages/TicketList/data";
+import {getpeoplehistory} from "@/services/handle_ticket";
+
+interface UserDetailProps {
+  value: any
+  UserDrawVisible: boolean;
+  onClose: () => void;
+}
+
+interface UserDetailData {
+  Address: string;
+  email: string;
+  gender: string;
+  name: string;
+  nickname: string;
+  type: string;
+  uid: string;
+}
+
+const UserDetail: React.FC<UserDetailProps> = (props) => {
+  const { UserDrawVisible, onClose, value } = props;
+  const [ Userdata, setUserdata] = useState<UserDetailData>({
+    Address: "",
+    email: "",
+    gender: "",
+    name: "",
+    nickname: "",
+    type: "",
+    uid: ""
+  });
+  const columns: ProColumns<any>[] = [
+    {
+      title: '预约时间',
+      width: 300,
+      dataIndex: 'schedule',
+    },
+    {
+      title: '联系人',
+      dataIndex: 'name',
+      ellipsis: true,
+    },
+    {
+      title: '宿舍号',
+      dataIndex: 'destination',
+      ellipsis: true,
+    },
+    {
+      title: '标题',
+      dataIndex: 'title',
+      width: 120,
+      ellipsis: true,
+    },
+    {
+      title: '详细描述',
+      dataIndex: 'description',
+      width: 170,
+      ellipsis: true,
+    },
+    {
+      title: '维修人',
+      dataIndex: 'staff',
+      ellipsis: true,
+    },
+    {
+      title: '回复',
+      dataIndex: 'reply',
+      width: 150,
+      ellipsis: true,
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      render: (_, record) => {
+        if (record.status === '未完成') {
+          return (
+            <Tag icon={<ClockCircleOutlined/>} color="default">
+              等待维修
+            </Tag>
+          )
+        }
+        if (record.status === '维修完成') {
+          return (
+            <Tag icon={<CheckCircleOutlined/>} color="success">
+              维修完成
+            </Tag>
+          )
+        }
+        if (record.status === '正在维修') {
+          return (
+            <Tag icon={<SyncOutlined spin/>} color="processing">
+              正在维修
+            </Tag>
+          )
+        }
+        if (record.status === '机主取消') {
+          return (
+            <Tag icon={<ExclamationCircleOutlined/>} color="warning">
+              您已取消
+            </Tag>
+          )
+        }
+        return (
+          <Tag icon={<CloseCircleOutlined/>} color="error">
+            未知
+          </Tag>
+        )
+      }
+    },
+  ];
+
+  useEffect(() => {
+    getuserinfo({id: value.owner}).then(value => {
+      setUserdata(value);
+    })
+    console.log(Userdata);
+  },[])
+
+  return (
+    <>
+      <Drawer
+        title="用户信息"
+        width={1100}
+        placement="right"
+        closable={false}
+        onClose={() => onClose()}
+        visible={UserDrawVisible}
+      >
+        <p>学号:{Userdata.uid}</p>
+        <p>姓名:{Userdata.name}</p>
+        <p>昵称:{Userdata.nickname}</p>
+        <p>性别:{Userdata.gender}</p>
+        <p>类型:{Userdata.type == 'student' ? '学生': '老师'}</p>
+        <p>地址:{Userdata.Address}</p>
+        <p>email:{Userdata.email}</p>
+
+        <ProTable<TableListItem>
+          rowKey="key"
+          // @ts-ignore
+          request={() => getpeoplehistory({uid: Userdata.uid})}
+          columns={columns}
+          search={false}
+        />
+      </Drawer>
+    </>
+  );
+};
+
+export default UserDetail
