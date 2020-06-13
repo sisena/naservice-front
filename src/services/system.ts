@@ -90,3 +90,47 @@ export async function getallschedule(params?: TableListParams):Promise<any> {
     params,
   });
 }
+
+export async function updatevacation(params?: TableListParams):Promise<any> {
+  return request('/api/v1/system/updatevacation',{
+    method: 'POST',
+    data: {
+      ...params,
+    }
+  });
+}
+
+export async function getvacation(params?: TableListParams):Promise<any> {
+  return request('/api/v1/system/getvacation',{
+    params,
+  });
+}
+
+export async function createann(params?: TableListParams):Promise<any> {
+  return request('/api/v1/ann/createann',{
+    method: 'POST',
+    data: {
+      ...params,
+    }
+  });
+}
+
+export async function updateann(params?: TableListParams):Promise<any> {
+  return request('/api/v1/ann/updateann',{
+    method: 'POST',
+    data: {
+      ...params,
+    }
+  });
+}
+
+export async function getallann(params?: TableListParams):Promise<any> {
+  return request('/api/v1/ann/getallann');
+}
+
+export async function deleteann(params?: TableListParams):Promise<any> {
+  return request('/api/v1/ann/deleteann',{
+    method: 'DELETE',
+    params,
+  });
+}

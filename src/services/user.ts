@@ -40,3 +40,7 @@ export async function changepassword(params:any): Promise<any> {
     }
   })
 }
+
+export async function getann(): Promise<any> {
+  return request('/api/v1/ann/getann')
+}

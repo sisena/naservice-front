@@ -48,13 +48,13 @@ export default defineConfig({
           routes: [
             {
               path: '/',
-              redirect: '/welcome',
+              redirect: '/Hello',
             },
             {
-              path: '/welcome',
-              name: 'welcome',
+              path: '/Hello',
+              name: 'hello',
               icon: 'smile',
-              component: './Welcome',
+              component: './Hello',
             },
             {
               path: '/admin',
@@ -146,6 +146,13 @@ export default defineConfig({
                   name: 'schedule',
                   icon: 'smile',
                   component: './system/schedule',
+                  authority: ['admin'],
+                },
+                {
+                  path: '/system/ann',
+                  name: 'announcement',
+                  icon: 'smile',
+                  component: './system/announcement',
                   authority: ['admin'],
                 },
               ],
