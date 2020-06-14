@@ -155,6 +155,13 @@ export default defineConfig({
                   component: './system/announcement',
                   authority: ['admin'],
                 },
+                {
+                  path: '/system/vacation',
+                  name: 'vacation',
+                  icon: 'smile',
+                  component: './system/vacationSetting',
+                  authority: ['admin'],
+                },
               ],
             },
             {

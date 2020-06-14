@@ -61,6 +61,7 @@ export default {
   'menu.system.schedule': '计划班次',
   'menu.system.class': '班次管理',
   'menu.system.announcement': '公告管理',
+  'menu.system.vacation': '假期模式设置',
   'menu.usersetting': '个人信息设置',
   'menu.hello': '你好',
 };
