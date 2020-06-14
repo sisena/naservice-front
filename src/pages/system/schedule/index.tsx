@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {PageHeaderWrapper} from '@ant-design/pro-layout';
-import {Button,Popconfirm} from 'antd';
+import {Button,Popconfirm,Alert} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {TableListItem} from './data';
@@ -90,6 +90,7 @@ const TableList: React.FC<{}> = () => {
 
   return (
     <PageHeaderWrapper>
+      <Alert message="使用提示: 如果某一天不提供报修服务,可以将这天最大容纳量设置为0" type="warning" showIcon closable />
       <ProTable<TableListItem>
         actionRef={actionRef}
         rowKey="id"
