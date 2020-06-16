@@ -172,6 +172,13 @@ export default defineConfig({
                   component: './system/vacationSetting',
                   authority: ['admin'],
                 },
+                {
+                  path: '/system/usermgr',
+                  name: 'usermgr',
+                  icon: 'smile',
+                  component: './system/usermgr',
+                  authority: ['admin'],
+                },
               ],
             },
             {

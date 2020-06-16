@@ -64,6 +64,7 @@ export default {
   'menu.system.class': '班次管理',
   'menu.system.announcement': '公告管理',
   'menu.system.vacation': '假期模式设置',
+  'menu.system.usermgr': '用户管理',
   'menu.usersetting': '个人信息设置',
   'menu.hello': '你好',
 };

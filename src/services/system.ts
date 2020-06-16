@@ -134,3 +134,43 @@ export async function deleteann(params?: TableListParams):Promise<any> {
     params,
   });
 }
+
+export async function getusers(params?: TableListParams):Promise<any> {
+  return request('/api/v1/usermgr/getusers',{
+    params,
+  });
+}
+
+export async function createuser(params?: TableListParams):Promise<any> {
+  return request('/api/v1/usermgr/createuser',{
+    method: 'POST',
+    data: {
+      ...params,
+    }
+  });
+}
+
+export async function updateuser(params?: TableListParams):Promise<any> {
+  return request('/api/v1/usermgr/updateuser',{
+    method: 'POST',
+    data: {
+      ...params,
+    }
+  });
+}
+
+export async function deleteuser(params?: TableListParams):Promise<any> {
+  return request('/api/v1/usermgr/deleteuser',{
+    method: 'DELETE',
+    params,
+  });
+}
+
+export async function userresetpwd(params?: TableListParams):Promise<any> {
+  return request('/api/v1/usermgr/userresetpwd',{
+    method: 'POST',
+    data: {
+      ...params,
+    }
+  });
+}
