@@ -1,6 +1,6 @@
 import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
-import { connect, Dispatch } from 'umi';
+import { connect, Dispatch,Link } from 'umi';
 import { StateType } from '@/models/login';
 import { LoginParamsType } from '@/services/login';
 import { ConnectState } from '@/models/connect';
@@ -106,13 +106,20 @@ const Login: React.FC<LoginProps> = (props) => {
           <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
             自动登录
           </Checkbox>
-          <a
+          <Link
             style={{
-              float: 'right',
-            }}
-          >
+            float: 'right',
+          }}
+            to="/user/forget">
             忘记密码
-          </a>
+          </Link>
+          {/*<a*/}
+          {/*  style={{*/}
+          {/*    float: 'right',*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  忘记密码*/}
+          {/*</a>*/}
         </div>
         <Submit loading={submitting}>登录</Submit>
         {/*<div className={styles.other}>*/}

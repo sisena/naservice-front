@@ -5,6 +5,8 @@ export default {
   'menu.admin': '管理页',
   'menu.admin.sub-page': '二级管理页',
   'menu.login': '登录',
+  'menu.forget': '忘记密码',
+  'menu.resetpasswd': '重置密码',
   'menu.register': '注册',
   'menu.register.result': '注册结果',
   'menu.dashboard': 'Dashboard',

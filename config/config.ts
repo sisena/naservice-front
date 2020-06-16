@@ -35,6 +35,16 @@ export default defineConfig({
           path: '/user/login',
           component: './user/login',
         },
+        {
+          name: 'forget',
+          path: '/user/forget',
+          component: './forget/index'
+        },
+        {
+          name: 'resetpasswd',
+          path: '/user/resetpasswd',
+          component: './forget/resetpasswd'
+        }
       ],
     },
     {
