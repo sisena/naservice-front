@@ -78,14 +78,14 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <FormItem
             name="title"
             label="问题概述"
-            rules={[{ required: true, message: '请输入问题概述！' }]}
+            rules={[{ required: true, max: 30, message: '请输入问题概述！' }]}
           >
             <Input placeholder="请输入概述" />
           </FormItem>
           <FormItem
             name="description"
             label="问题描述"
-            rules={[{ required: true, message: '请输入至少三个字符的问题描述！', min: 3 }]}
+            rules={[{ required: true, max: 100, message: '请输入至少三个字符的问题描述！', min: 3 }]}
           >
             <TextArea rows={4} placeholder="请输入至少五个字符" />
           </FormItem>
@@ -104,21 +104,21 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         <FormItem
           name="name"
           label="姓名"
-          rules={[{ required: true, message: '请输入需要维修者姓名！' }]}
+          rules={[{ required: true, max: 10,message: '请输入需要维修者姓名！' }]}
         >
           <Input placeholder="请输入姓名" />
         </FormItem>
         <FormItem
           name="phone"
           label="手机号"
-          rules={[{ required: true, message: '请输入手机号！' }]}
+          rules={[{ required: true, max: 30,message: '请输入手机号！' }]}
         >
           <Input placeholder="请输入手机号" />
         </FormItem>
         <FormItem
           name="destination"
           label="维修地点"
-          rules={[{ required: true, message: '请输入维修地点！' }]}
+          rules={[{ required: true, max: 100, message: '请输入维修地点！' }]}
         >
           <Input placeholder="请输入维修地点" />
         </FormItem>
@@ -168,7 +168,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       width={640}
       bodyStyle={{ padding: '32px 40px 48px' }}
       destroyOnClose
-      title="规则配置"
+      title="更新我的报修"
       visible={updateModalVisible}
       footer={renderFooter()}
       onCancel={() => handleModalVisible()}

@@ -24,7 +24,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
   const [form] = Form.useForm();
 
   const submit = async () => {
-    const fieldsValue = await form.getFieldsValue();
+    const fieldsValue = await form.validateFields();
 
     setFormVals({...formVals , ...fieldsValue });
 
@@ -44,13 +44,13 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       <Form
       form={form}
       initialValues={{
-        type: "student"
+        is_vaild: 'true'
       }}
       >
-        <FormItem name="title" label="标题" rules={[{ required: true, message: '请输入标题！' }]}>
+        <FormItem name="title" label="标题" rules={[{ required: true, max: 100,message: '请输入标题！' }]}>
           <Input/>
         </FormItem>
-        <FormItem name="text" label="内容" rules={[{ required: true, message: '请输入公告内容！' }]}>
+        <FormItem name="text" label="内容" rules={[{ required: true, max: 100,message: '请输入公告内容！' }]}>
           <Input/>
         </FormItem>
         <FormItem name="is_vaild" label="是否开启">

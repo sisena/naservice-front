@@ -48,14 +48,14 @@ const PasswordForm: React.FC<CompleteFormProps> = (props) => {
         <FormItem
           label="新密码"
           name="password"
-          rules={[{required: true, message: '新密码不为空!'}]}
+          rules={[{required: true, max: 100,message: '新密码不为空!'}]}
         >
           <Input.Password/>
         </FormItem>
         <FormItem
           label="再一次新密码"
           name="password_again"
-          rules={[{required: true, message: '两次密码不一致!'}]}
+          rules={[{required: true, max: 100,message: '两次密码不一致!'}]}
         >
           <Input.Password/>
         </FormItem>

@@ -24,7 +24,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
   const [form] = Form.useForm();
 
   const submit = async () => {
-    const fieldsValue = await form.getFieldsValue();
+    const fieldsValue = await form.validateFields();
     // console.log(str)
     setFormVals({...formVals , ...fieldsValue });
     // console.log({ ...formVals, reply: str });
@@ -44,7 +44,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       <Form
       form={form}
       >
-        <FormItem name="uid" label="学号" rules={[{ required: true, message: '请输入学号！' }]}>
+        <FormItem name="uid" label="学号" rules={[{ required: true, max: 20, message: '请输入学号！' }]}>
           <Input />
         </FormItem>
         <FormItem name="role" label="权限">

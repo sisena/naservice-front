@@ -32,7 +32,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const [form] = Form.useForm();
 
   const submit = async () => {
-    const fieldsValue = await form.getFieldsValue();
+    const fieldsValue = await form.validateFields();
     // console.log(str)
     setFormVals({...formVals , ...fieldsValue });
     // console.log({ ...formVals, reply: str });
@@ -60,7 +60,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           maxticket: formVals.maxticket,
         }}
       >
-        <FormItem name="descript" label="描述" rules={[{ required: true, message: '请输入描述！' }]}>
+        <FormItem name="descript" label="描述" rules={[{ required: true, max: 100,message: '请输入描述！' }]}>
           <Input/>
         </FormItem>
         <FormItem name="maxticket" label="最大班数" rules={[{ required: true, message: '请输入描述！' }]}>

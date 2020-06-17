@@ -68,13 +68,13 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           Address: formVals.Address,
         }}
       >
-        <FormItem name="uid" label="学号/工号" rules={[{ required: true, message: '请输入学号/工号！' }]}>
+        <FormItem name="uid" label="学号/工号" rules={[{ required: true, max: 20,message: '请输入学号/工号！' }]}>
           <Input />
         </FormItem>
-        <FormItem name="name" label="真实姓名" rules={[{ required: true, message: '请输入真实名字！' }]}>
+        <FormItem name="name" label="真实姓名" rules={[{ required: true,  max: 10,message: '请输入真实名字！' }]}>
           <Input />
         </FormItem>
-        <FormItem name="nickname" label="昵称" rules={[{ required: true, message: '可以同上！' }]}>
+        <FormItem name="nickname" label="昵称" rules={[{ required: true,  max: 10,message: '可以同上！' }]}>
           <Input />
         </FormItem>
         <FormItem name="gender" label="性别" rules={[{ required: true, message: '请选择性别！' }]}>
@@ -89,10 +89,10 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             <Option value="teacher">老师</Option>
           </Select>
         </FormItem>
-        <FormItem name="email" label="email" rules={[{ required: true, message: '请输入邮箱！' }]}>
+        <FormItem name="email" label="email" rules={[{ required: true, type: "email",max: 50, message: '请输入邮箱！' }]}>
           <Input />
         </FormItem>
-        <FormItem name="Address" label="宿舍号" rules={[{ required: true, message: '请输入宿舍号！' }]}>
+        <FormItem name="Address" label="宿舍号" rules={[{ required: true, max: 30, message: '请输入宿舍号！' }]}>
           <Input />
         </FormItem>
       </Form>

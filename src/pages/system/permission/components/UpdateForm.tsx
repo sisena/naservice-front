@@ -29,7 +29,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const [form] = Form.useForm();
 
   const submit = async () => {
-    const fieldsValue = await form.getFieldsValue();
+    const fieldsValue = await form.validateFields();
     // console.log(str)
     setFormVals({...formVals , ...fieldsValue });
     // console.log({ ...formVals, reply: str });
@@ -53,7 +53,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           role: formVals.role,
         }}
       >
-        <FormItem name="uid" label="学号" rules={[{ required: true, message: '请输入学号！' }]}>
+        <FormItem name="uid" label="学号" rules={[{ required: true, max: 20, message: '请输入学号！' }]}>
           <Input />
         </FormItem>
         <FormItem name="role" label="权限">

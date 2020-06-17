@@ -13,7 +13,7 @@ const Forgetpass: React.FC<{}> = () => {
   const [form] = Form.useForm();
 
   const submit = async () => {
-    const fieldValue = await form.getFieldsValue();
+    const fieldValue = await form.validateFields();
     setFormVals({...fieldValue})
     setloading(true)
     const success = await userforget({...formVals,...fieldValue})
@@ -40,7 +40,7 @@ const Forgetpass: React.FC<{}> = () => {
               name="uid"
               label=""
               className={styles.input}
-              rules={[{required: true, message: '学号/工号不能为空'}]}
+              rules={[{required: true, max: 20,message: '学号/工号不能为空'}]}
             >
               <Input placeholder="学号/工号"/>
             </FormItem>

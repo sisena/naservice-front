@@ -28,7 +28,7 @@ const CompleteForm: React.FC<CompleteFormProps> = (props) => {
   const [form] = Form.useForm();
 
   const submit = async () => {
-    const fieldsValue = await form.getFieldsValue();
+    const fieldsValue = await form.validateFields();
     let str = '';
     for (let v of fieldsValue.reply) {
       str = str + v + '';
@@ -52,7 +52,7 @@ const CompleteForm: React.FC<CompleteFormProps> = (props) => {
       <Form
       form={form}
       >
-        <FormItem name="reply" label="回复" rules={[{ required: true, message: '请输入回复内容！' }]}>
+        <FormItem name="reply" label="回复" rules={[{ required: true, max: 100,message: '请输入回复内容！' }]}>
           <Select mode="tags" style={{ width: '100%' }}>
             <Option value="您的问题已经处理完成，感谢您对NA的支持，祝您生活愉快！O(∩_∩)O">您的问题已经处理完成，感谢您对NA的支持，祝您生活愉快！O(∩_∩)O</Option>
             <Option value="您好，此问题不在我们服务范围之内，感谢您使用报修网，祝您生活愉快！">您好，此问题不在我们服务范围之内，感谢您使用报修网，祝您生活愉快！</Option>

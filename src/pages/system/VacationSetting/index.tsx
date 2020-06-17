@@ -24,7 +24,7 @@ const vacationsetting: React.FC<{}> = () => {
   const [form] = Form.useForm();
 
   const infosubmit = async () => {
-    const fieldsValue = await form.getFieldsValue();
+    const fieldsValue = await form.validateFields();
 
     setInfoVals({...InfoVals , ...fieldsValue});
 
@@ -70,10 +70,10 @@ const vacationsetting: React.FC<{}> = () => {
               <Option value="false">关闭</Option>
             </Select>
           </FormItem>
-          <FormItem name="vacationstart" label="开始时间">
+          <FormItem name="vacationstart" rules={[{ required: true, max: 20,message: '请输入正确格式！' }]} label="开始时间">
             <Input placeholder="eg: 2020-03-13"/>
           </FormItem>
-          <FormItem name="vacationend" label="结束时间">
+          <FormItem name="vacationend" rules={[{ required: true, max: 20,message: '请输入正确格式！' }]} label="结束时间">
             <Input placeholder="eg: 2020-06-20"/>
           </FormItem>
           <FormItem {...tailLayout} label="" colon={false}>

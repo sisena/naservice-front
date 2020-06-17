@@ -53,7 +53,7 @@ class Resetpasswd extends React.Component<any> {
                   label=""
                   name="password"
                   className={styles.input}
-                  rules={[{required: true, message: '新密码不为空!'}]}
+                  rules={[{required: true, max: 100,message: '新密码不为空!'}]}
                 >
                   <Input.Password placeholder="新密码"/>
                 </FormItem>
@@ -61,7 +61,7 @@ class Resetpasswd extends React.Component<any> {
                   label=""
                   name="password_again"
                   className={styles.input}
-                  rules={[{required: true, message: '两次密码不一致!'}]}
+                  rules={[{required: true, max: 100 ,message: '两次密码不一致!'}]}
                 >
                   <Input.Password placeholder="再一次新密码"/>
                 </FormItem>

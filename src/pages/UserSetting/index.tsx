@@ -26,7 +26,7 @@ const UserSetting: React.FC<UserModelState> = (props) => {
   const [form] = Form.useForm();
 
   const infosubmit = async () => {
-    const fieldsValue = await form.getFieldsValue();
+    const fieldsValue = await form.validateFields();
 
     setInfoVals({...InfoVals , ...fieldsValue});
 
@@ -70,21 +70,21 @@ const UserSetting: React.FC<UserModelState> = (props) => {
           <Form.Item
             name="nickname"
             label="昵称"
-            rules={[{required: true, message: '昵称不能为空'}]}
+            rules={[{required: true, max: 10, message: '昵称不能为空'}]}
           >
             <Input/>
           </Form.Item>
           <Form.Item
             name="email"
             label="Email"
-            rules={[{required: true,type: 'email', message: '邮件不能为空'}]}
+            rules={[{required: true, max: 50, type: 'email', message: '邮件不能为空'}]}
           >
             <Input/>
           </Form.Item>
           <Form.Item
             name="Address"
             label="宿舍号"
-            rules={[{required: true, message: '宿舍号不能为空'}]}
+            rules={[{required: true, max: 30, message: '宿舍号不能为空'}]}
           >
             <Input/>
           </Form.Item>

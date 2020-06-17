@@ -35,7 +35,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const [form] = Form.useForm();
 
   const submit = async () => {
-    const fieldsValue = await form.getFieldsValue();
+    const fieldsValue = await form.validateFields();
 
     setFormVals({...formVals , ...fieldsValue });
 
@@ -74,7 +74,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             <Option value="teacher">老师</Option>
           </Select>
         </FormItem>
-        <FormItem name="zone" label="区域" rules={[{ required: true, message: '请输入区域！' }]}>
+        <FormItem name="zone" label="区域" rules={[{ required: true, max: 30, message: '请输入区域！' }]}>
           <Input placeholder="xx:xx:xx 确保格式正确"/>
         </FormItem>
       </Form>
