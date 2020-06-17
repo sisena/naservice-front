@@ -111,6 +111,7 @@ const TableList: React.FC<{}> = () => {
                 handleUpdateModalVisible(true);
                 setStepFormValues(record);
               }}
+              style={{ margin: 2 }}
             >
               设置
             </Button>
@@ -118,6 +119,7 @@ const TableList: React.FC<{}> = () => {
             <Button
               type="primary"
               disabled
+              style={{ margin: 2 }}
             >
               设置
             </Button>
@@ -139,6 +141,7 @@ const TableList: React.FC<{}> = () => {
             >
               <Button
                 danger
+                style={{ margin: 2 }}
               >
                 删除
               </Button>
@@ -147,6 +150,7 @@ const TableList: React.FC<{}> = () => {
             <Button
               danger
               disabled
+              style={{ margin: 2 }}
             >
               删除
             </Button>

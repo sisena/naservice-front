@@ -56,6 +56,7 @@ const TableList: React.FC<{}> = () => {
         <>
           <Button
               type="primary"
+              style={{ margin: 2 }}
               onClick={() => {
                 handleUpdateFormVisible(true)
                 setFormValues(record)
@@ -79,6 +80,7 @@ const TableList: React.FC<{}> = () => {
           >
             <Button
               danger
+              style={{ margin: 2 }}
             >
               删除
             </Button>

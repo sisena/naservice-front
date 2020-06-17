@@ -109,6 +109,7 @@ const TableList: React.FC<{}> = () => {
         <>
           <Button
             type="primary"
+            style={{ margin: 2 }}
             onClick={async () => {
               // @ts-ignore
               const success = await acceptticket({ticketid: record.id})

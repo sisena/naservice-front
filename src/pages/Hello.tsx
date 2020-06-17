@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Card, Alert } from 'antd';
-import { TagsFilled } from '@ant-design/icons';
+import { PushpinOutlined } from '@ant-design/icons';
 import {getann} from '@/services/user';
 
 
@@ -25,7 +25,7 @@ const Hello: React.FC<{}> = () => {
       <Alert
         message="公告"
         type="success"
-        icon={<TagsFilled />}
+        icon={<PushpinOutlined />}
         banner
         style={{
           margin: -12,

@@ -123,6 +123,7 @@ const TableList: React.FC<{}> = () => {
           {(record.status == '正在维修') ?
             <Button
               type="primary"
+              style={{ margin: 2 }}
               onClick={() => {
                 setFormValues(record);
                 handleModalVisible(true);
@@ -135,13 +136,15 @@ const TableList: React.FC<{}> = () => {
             <Button
               type="primary"
               disabled
+              style={{ margin: 2 }}
             >
               消单
             </Button>
           }
           {(record.status == '正在维修') ?
             <Button
-              type="primary"
+              type="dashed"
+              style={{ margin: 2 }}
               onClick={async () => {
                 // @ts-ignore
                 const success = await abortticket({ticketid: record.id})
@@ -158,6 +161,7 @@ const TableList: React.FC<{}> = () => {
             <Button
               danger
               disabled
+              style={{ margin: 2 }}
             >
               取消
             </Button>
