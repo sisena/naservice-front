@@ -8,7 +8,7 @@ import {
   CloseCircleOutlined
 } from '@ant-design/icons';
 import {PageHeaderWrapper} from '@ant-design/pro-layout';
-import {Button, Tag, Popconfirm} from 'antd';
+import {Button, Tag, Popconfirm,notification} from 'antd';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {TableListItem} from './data';
 import {getmyhistory, createticket, ticketupdate, cancelticket} from "@/services/basis_ticket";
@@ -183,6 +183,11 @@ const TableList: React.FC<{}> = () => {
             if (actionRef.current) {
               actionRef.current.reload();
             }
+            notification.success({
+              message: '创建成功',
+              description:
+                '',
+            });
           }
         }}
         onCancel={() => {
