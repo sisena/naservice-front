@@ -15,7 +15,8 @@ export interface TableListData {
   pagination: Partial<TableListPagination>;
 }
 
-export interface TableListParams {
+export interface TableListParams extends Partial<TableListItem>{
+  id?: string;
   sorter?: string;
   status?: string;
   name?: string;

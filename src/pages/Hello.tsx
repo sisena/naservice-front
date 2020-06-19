@@ -4,7 +4,6 @@ import { Card, Alert } from 'antd';
 import { PushpinOutlined } from '@ant-design/icons';
 import {getann} from '@/services/user';
 
-
 interface item {
   id?: string;
   text?: string;

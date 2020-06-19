@@ -17,7 +17,6 @@ interface CompleteFormProps {
 const PasswordForm: React.FC<CompleteFormProps> = (props) => {
   const [formVals, setFormVals] = useState<FormValueType>({});
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();

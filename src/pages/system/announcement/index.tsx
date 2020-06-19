@@ -54,7 +54,6 @@ const TableList: React.FC<{}> = () => {
           <Popconfirm
             title="确定删除?"
             onConfirm={async () => {
-              // @ts-ignore
               const success = await deleteann({id: record.id});
               if (success) {
                 if (actionRef.current) {
@@ -97,7 +96,6 @@ const TableList: React.FC<{}> = () => {
           handleCreateFormVisible(false)
         }}
         onSubmit={async (value) => {
-          // @ts-ignore
           const success = await createann(value)
           if (success) {
            handleCreateFormVisible(false)
@@ -116,7 +114,6 @@ const TableList: React.FC<{}> = () => {
             setFormValues({})
           }}
           onSubmit={async (value) => {
-            // @ts-ignore
             const success = await updateann(value)
             if (success) {
               handleUpdateFormVisible(false)

@@ -6,10 +6,14 @@ const {Option} = Select;
 
 const FormItem = Form.Item;
 
+interface itemVal {
+  id: string;
+  description: string;
+}
+
 const ScheduleOption: React.FC<{}> = () => {
   const [data, setdata] = useState([]);
 
-  // @ts-ignore
   useEffect(() => {
     getavailschedules().then(value => {
       setdata(value)
@@ -24,11 +28,9 @@ const ScheduleOption: React.FC<{}> = () => {
         label="选择时间"
       >
         <Select size="large">
-          {data.length > 0 ? data.map((item) => {
-            // @ts-ignore
+          {data.length > 0 ? data.map((item:itemVal) => {
             return (
               <>
-                // @ts-ignore
                 <Option value={item.id}>{item.description}</Option>
               </>
             )

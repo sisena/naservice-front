@@ -29,7 +29,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     zone: props.values.zone,
   });
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();

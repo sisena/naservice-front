@@ -6,10 +6,16 @@ const {Option} = Select;
 
 const FormItem = Form.Item;
 
+interface itemVals {
+  id: string;
+  start_time: string;
+  end_time: string;
+  type: string;
+}
+
 const ClassOption: React.FC<{}> = () => {
   const [data, setdata] = useState([]);
 
-  // @ts-ignore
   useEffect(() => {
     getallclass().then(value => {
       setdata(value.data)
@@ -24,11 +30,9 @@ const ClassOption: React.FC<{}> = () => {
         label="选择班次"
       >
         <Select size="large">
-          {data.length > 0 ? data.map((item) => {
-            // @ts-ignore
+          {data.length > 0 ? data.map((item:itemVals) => {
             return (
               <>
-                // @ts-ignore
                 <Option value={item.id}>{item.start_time}-{item.end_time} {item.type} </Option>
               </>
             )

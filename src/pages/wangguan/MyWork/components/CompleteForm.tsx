@@ -22,7 +22,6 @@ const CompleteForm: React.FC<CompleteFormProps> = (props) => {
     id: props.values.id
   });
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();

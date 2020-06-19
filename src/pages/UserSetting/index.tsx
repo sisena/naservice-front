@@ -1,25 +1,24 @@
 import React, {useEffect, useState} from 'react'
 import {PageHeaderWrapper} from '@ant-design/pro-layout';
 import {Form, Input, Button,Card,notification} from 'antd';
-import { connect} from 'umi';
-import {UserModelState} from "@/models/user";
+import { connect,ConnectProps} from 'umi';
+import {CurrentUser} from "@/models/user";
 import {ConnectState} from "@/models/connect";
 import {updatemyinfo,changepassword} from "@/services/user";
 import PasswordForm from "./PasswordForm";
 
-const UserSetting: React.FC<UserModelState> = (props) => {
-  // @ts-ignore
+interface InfoValsProps extends ConnectProps{
+  currentUser?: CurrentUser,
+  nickname?: string,
+  email?: string,
+  Address?: string,
+}
+const UserSetting: React.FC<InfoValsProps> = (props) => {
   const { currentUser,dispatch } = props
   const [PwdchangeVisible, handlePwdchangeVisible] = useState(false);
-  const [InfoVals, setInfoVals] = useState<UserModelState>({
-    // @ts-ignore
-    nickname: currentUser?.nickname,
-    email: currentUser?.email,
-    Address: currentUser?.Address,
-  });
+  const [InfoVals, setInfoVals] = useState<CurrentUser | undefined>({});
 
   useEffect(() => {
-    // @ts-ignore
     setInfoVals(currentUser)
   },[])
 
@@ -54,7 +53,6 @@ const UserSetting: React.FC<UserModelState> = (props) => {
     wrapperCol: { offset: 7, span: 16 },
   };
 
-  // @ts-ignore
   return (
     <PageHeaderWrapper>
       <Card>

@@ -24,7 +24,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     is_vaild: props.values.is_vaild,
   });
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();

@@ -23,7 +23,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     role: props.values.role,
   });
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();

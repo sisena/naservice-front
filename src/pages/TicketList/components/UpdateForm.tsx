@@ -186,7 +186,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           destination: formVals.destination,
           name: formVals.name,
           phone: formVals.phone,
-          // schedule: formVals.schedule,
           title: formVals.title,
         }}
       >

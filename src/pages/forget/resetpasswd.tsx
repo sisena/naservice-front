@@ -20,7 +20,7 @@ class Resetpasswd extends React.Component<any> {
     })
   }
 
-  onFinish = values => {
+  onFinish = (values:any) => {
     const success = resetpassword({...values,token: this.state.token.token});
     if (success) {
       notification.success({

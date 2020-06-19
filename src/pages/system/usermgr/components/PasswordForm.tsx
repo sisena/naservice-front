@@ -22,7 +22,6 @@ const PasswordForm: React.FC<PasswordFormProps> = (props) => {
     uid : props.values.uid
   });
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();

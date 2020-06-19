@@ -128,7 +128,6 @@ const TableList: React.FC<{}> = () => {
             <Popconfirm
               title="确定删除?"
               onConfirm={async () => {
-                // @ts-ignore //这里因为后端的query是ticketid,为了不搞乱data.d.ts就不写进去了
                 const success = await cancelticket({ticketid: record.id})
                 if (success) {
                   if (actionRef.current) {

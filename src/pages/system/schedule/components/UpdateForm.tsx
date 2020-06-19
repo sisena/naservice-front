@@ -26,7 +26,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     maxticket: props.values.maxticket,
   });
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();
@@ -42,7 +41,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   return (
     <Modal
       destroyOnClose
-      title="更新权限"
+      title="更新计划班次"
       okText="确定"
       cancelText="取消"
       visible={modalVisible}
@@ -53,9 +52,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         form={form}
         initialValues={{
           id: formVals.id,
-          // date: formVals.date,
-          // classid: formVals.class,
-          // type: formVals.type,
           descript: formVals.descript,
           maxticket: formVals.maxticket,
         }}

@@ -123,7 +123,6 @@ const TableList: React.FC<{}> = () => {
               type="primary"
               style={{ margin: 2 }}
               onClick={async () => {
-                // @ts-ignore
                 const success = await acceptticket({ticketid: record.id})
                 if (success) {
                   if (actionRef.current) {

@@ -1,13 +1,18 @@
 import request from "@/utils/request";
-import {TableListParams} from "@/pages/wangguan/data";
+import {TableListParams as annListParams} from "@/pages/system/announcement/data";
+import {TableListParams as classListParams} from "@/pages/system/class/data";
+import {TableListParams as permissionListParams} from "@/pages/system/permission/data";
+import {TableListParams as scheduleListParams} from "@/pages/system/schedule/data";
+import {TableListParams as usermgrListParams} from "@/pages/system/usermgr/data";
+import {vacationinfo as vacationListParamas} from "@/pages/system/VacationSetting";
 
-export async function getallpermission(params?: TableListParams):Promise<any> {
+export async function getallpermission(params?: permissionListParams):Promise<any> {
   return request('/api/v1/permission/getpermission',{
     params,
   });
 }
 
-export async function addpermission(params?: TableListParams):Promise<any> {
+export async function addpermission(params?: permissionListParams):Promise<any> {
   return request('/api/v1/permission/addpermission', {
     method: 'POST',
     data: {
@@ -16,7 +21,7 @@ export async function addpermission(params?: TableListParams):Promise<any> {
   })
 }
 
-export async function updatepermission(params?: TableListParams):Promise<any> {
+export async function updatepermission(params?: permissionListParams):Promise<any> {
   return request('/api/v1/permission/updatepermission', {
     method: 'POST',
     data: {
@@ -25,20 +30,20 @@ export async function updatepermission(params?: TableListParams):Promise<any> {
   })
 }
 
-export async function deletepermission(params?: TableListParams):Promise<any> {
+export async function deletepermission(params?: permissionListParams):Promise<any> {
   return request('/api/v1/permission/deletepermission',{
     method: 'DELETE',
     params,
   });
 }
 
-export async function getallclass(params?: TableListParams):Promise<any> {
+export async function getallclass(params?: classListParams):Promise<any> {
   return request('/api/v1/class/getclasses',{
     params,
   });
 }
 
-export async function addclass(params?: TableListParams):Promise<any> {
+export async function addclass(params?: classListParams):Promise<any> {
   return request('/api/v1/class/addclass', {
     method: 'POST',
     data: {
@@ -47,7 +52,7 @@ export async function addclass(params?: TableListParams):Promise<any> {
   })
 }
 
-export async function updateclass(params?: TableListParams):Promise<any> {
+export async function updateclass(params?: classListParams):Promise<any> {
   return request('/api/v1/class/updateclass', {
     method: 'POST',
     data: {
@@ -56,20 +61,20 @@ export async function updateclass(params?: TableListParams):Promise<any> {
   })
 }
 
-export async function deleteclass(params?: TableListParams):Promise<any> {
+export async function deleteclass(params?: classListParams):Promise<any> {
   return request('/api/v1/class/deleteclass',{
     method: 'DELETE',
     params,
   });
 }
 
-export async function addschedule(params?: TableListParams):Promise<any> {
+export async function addschedule(params?: scheduleListParams):Promise<any> {
   return request('/api/v1/schedule/addschedule',{
     params,
   });
 }
 
-export async function updateschedule(params?: TableListParams):Promise<any> {
+export async function updateschedule(params?: scheduleListParams):Promise<any> {
   return request('/api/v1/schedule/updateschedule', {
     method: 'POST',
     data: {
@@ -78,20 +83,20 @@ export async function updateschedule(params?: TableListParams):Promise<any> {
   })
 }
 
-export async function deleteschedule(params?: TableListParams):Promise<any> {
+export async function deleteschedule(params?: scheduleListParams):Promise<any> {
   return request('/api/v1/schedule/deleteschedule',{
     method: 'DELETE',
     params,
   });
 }
 
-export async function getallschedule(params?: TableListParams):Promise<any> {
+export async function getallschedule(params?: scheduleListParams):Promise<any> {
   return request('/api/v1/schedule/getallschedules',{
     params,
   });
 }
 
-export async function updatevacation(params?: TableListParams):Promise<any> {
+export async function updatevacation(params?: vacationListParamas):Promise<any> {
   return request('/api/v1/system/updatevacation',{
     method: 'POST',
     data: {
@@ -100,13 +105,13 @@ export async function updatevacation(params?: TableListParams):Promise<any> {
   });
 }
 
-export async function getvacation(params?: TableListParams):Promise<any> {
+export async function getvacation(params?: vacationListParamas):Promise<any> {
   return request('/api/v1/system/getvacation',{
     params,
   });
 }
 
-export async function createann(params?: TableListParams):Promise<any> {
+export async function createann(params?: annListParams):Promise<any> {
   return request('/api/v1/ann/createann',{
     method: 'POST',
     data: {
@@ -115,7 +120,7 @@ export async function createann(params?: TableListParams):Promise<any> {
   });
 }
 
-export async function updateann(params?: TableListParams):Promise<any> {
+export async function updateann(params?: annListParams):Promise<any> {
   return request('/api/v1/ann/updateann',{
     method: 'POST',
     data: {
@@ -124,24 +129,24 @@ export async function updateann(params?: TableListParams):Promise<any> {
   });
 }
 
-export async function getallann(params?: TableListParams):Promise<any> {
+export async function getallann(params?: annListParams):Promise<any> {
   return request('/api/v1/ann/getallann');
 }
 
-export async function deleteann(params?: TableListParams):Promise<any> {
+export async function deleteann(params?: annListParams):Promise<any> {
   return request('/api/v1/ann/deleteann',{
     method: 'DELETE',
     params,
   });
 }
 
-export async function getusers(params?: TableListParams):Promise<any> {
+export async function getusers(params?: usermgrListParams):Promise<any> {
   return request('/api/v1/usermgr/getusers',{
     params,
   });
 }
 
-export async function createuser(params?: TableListParams):Promise<any> {
+export async function createuser(params?: usermgrListParams):Promise<any> {
   return request('/api/v1/usermgr/createuser',{
     method: 'POST',
     data: {
@@ -150,7 +155,7 @@ export async function createuser(params?: TableListParams):Promise<any> {
   });
 }
 
-export async function updateuser(params?: TableListParams):Promise<any> {
+export async function updateuser(params?: usermgrListParams):Promise<any> {
   return request('/api/v1/usermgr/updateuser',{
     method: 'POST',
     data: {
@@ -159,14 +164,14 @@ export async function updateuser(params?: TableListParams):Promise<any> {
   });
 }
 
-export async function deleteuser(params?: TableListParams):Promise<any> {
+export async function deleteuser(params?: usermgrListParams):Promise<any> {
   return request('/api/v1/usermgr/deleteuser',{
     method: 'DELETE',
     params,
   });
 }
 
-export async function userresetpwd(params?: TableListParams):Promise<any> {
+export async function userresetpwd(params?: usermgrListParams):Promise<any> {
   return request('/api/v1/usermgr/userresetpwd',{
     method: 'POST',
     data: {

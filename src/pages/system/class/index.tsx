@@ -59,10 +59,11 @@ const TableList: React.FC<{}> = () => {
           <Popconfirm
             title="确定删除?"
             onConfirm={async () => {
-              // @ts-ignore
               const success = await deleteclass({id: record.id});
-              if (actionRef.current) {
-                actionRef.current.reload();
+              if (success) {
+                if (actionRef.current) {
+                  actionRef.current.reload();
+                }
               }
             }}
             okText="是"
@@ -100,7 +101,6 @@ const TableList: React.FC<{}> = () => {
           handleCreateFormVisible(false)
         }}
         onSubmit={async (value) => {
-          // @ts-ignore
           const success = await addclass(value)
           if (success) {
            handleCreateFormVisible(false)
@@ -119,7 +119,6 @@ const TableList: React.FC<{}> = () => {
             setFormValues({})
           }}
           onSubmit={async (value) => {
-            // @ts-ignore
             const success = await updateclass(value)
             if (success) {
               handleUpdateFormVisible(false)

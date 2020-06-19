@@ -19,7 +19,6 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
   const [formVals, setFormVals] = useState<FormValueType>({});
   const [DateVals, setDateVals] = useState("");
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();

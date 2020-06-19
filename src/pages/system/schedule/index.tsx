@@ -67,7 +67,6 @@ const TableList: React.FC<{}> = () => {
           <Popconfirm
             title="此操作只是为了删除错误的手动新建，该日未到达依然会自动创建，确认删除?"
             onConfirm={async () => {
-              // @ts-ignore
               const success = await deleteschedule({id: record.id})
               if (success) {
                 if (actionRef.current) {
@@ -112,7 +111,6 @@ const TableList: React.FC<{}> = () => {
           handleCreateFormVisible(false)
         }}
         onSubmit={async (value) => {
-          // @ts-ignore
           const success = await addschedule(value)
           if (success) {
             handleCreateFormVisible(false)
@@ -131,7 +129,6 @@ const TableList: React.FC<{}> = () => {
             setFormValues({})
           }}
           onSubmit={async (value) => {
-            // @ts-ignore
             const success = await updateschedule(value)
             if (success) {
               handleUpdateFormVisible(false)

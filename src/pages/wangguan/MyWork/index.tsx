@@ -146,7 +146,6 @@ const TableList: React.FC<{}> = () => {
               type="dashed"
               style={{ margin: 2 }}
               onClick={async () => {
-                // @ts-ignore
                 const success = await abortticket({ticketid: record.id})
                 if (success) {
                   if (actionRef.current) {

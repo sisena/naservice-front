@@ -80,7 +80,6 @@ const TableList: React.FC<{}> = () => {
           <Popconfirm
             title="确认删除?"
             onConfirm={async () => {
-              // @ts-ignore
               const success = await deleteuser({uid: record.uid})
               if (success) {
                 if (actionRef.current) {
@@ -124,7 +123,6 @@ const TableList: React.FC<{}> = () => {
           handleCreateFormVisible(false)
         }}
         onSubmit={async (value) => {
-          // @ts-ignore
           const success = await createuser(value)
           if (success) {
             handleCreateFormVisible(false)
@@ -143,7 +141,6 @@ const TableList: React.FC<{}> = () => {
             setFormValues({})
           }}
           onSubmit={async (value) => {
-            // @ts-ignore
             const success = await updateuser(value)
             if (success) {
               handleUpdateFormVisible(false)
@@ -165,7 +162,6 @@ const TableList: React.FC<{}> = () => {
           setFormValues({})
         }}
         onSubmit={async (value) => {
-          // @ts-ignore
           const success = await userresetpwd(value)
           if (success) {
             notification.success({

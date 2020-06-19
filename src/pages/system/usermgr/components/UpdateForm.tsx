@@ -33,7 +33,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     Address: props.values.Address,
   });
 
-  // @ts-ignore
   const { modalVisible, onCancel, onSubmit } = props;
 
   const [form] = Form.useForm();

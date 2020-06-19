@@ -6,7 +6,7 @@ import {getvacation,updatevacation} from "@/services/system";
 const { Option } = Select;
 const FormItem = Form.Item;
 
-interface vacationinfo {
+export interface vacationinfo {
   vacation?: string,
   vacationstart?: string;
   vacationend?: string;
@@ -28,7 +28,6 @@ const vacationsetting: React.FC<{}> = () => {
 
     setInfoVals({...InfoVals , ...fieldsValue});
 
-    // @ts-ignore
     const success =await updatevacation({ ...InfoVals, ...fieldsValue });
     if (success) {
       notification.success({
@@ -48,7 +47,6 @@ const vacationsetting: React.FC<{}> = () => {
     wrapperCol: { offset: 7, span: 16 },
   };
 
-  // @ts-ignore
   return (
     <PageHeaderWrapper>
       <Card>

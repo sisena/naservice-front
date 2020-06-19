@@ -49,7 +49,6 @@ const TableList: React.FC<{}> = () => {
             <Popconfirm
               title="确定删除?"
               onConfirm={async () => {
-                // @ts-ignore
                 const success = await deletepermission({id: record.uid})
                 if (success) {
                   if (actionRef.current) {
