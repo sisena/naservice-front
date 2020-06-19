@@ -125,6 +125,7 @@ const TableList: React.FC<{}> = () => {
               if (actionRef.current) {
                 actionRef.current.reload();
               }
+              setFormValues({})
             }
           }}
           values={FormValues}
