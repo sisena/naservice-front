@@ -24,11 +24,13 @@ export function getAuthority(str?: string): string | string[] {
   // return authority;
 
   const authorityString =
-    typeof str === 'undefined' && localStorage ? localStorage.getItem('rolename') : str;
+    // typeof str === 'undefined' && localStorage ? getWithExpiry('rolename') : str;
+     getWithExpiry('rolename');
   // authorityString could be admin, "admin", ["admin"]
   let authority;
   try {
     if (authorityString) {
+      // @ts-ignore
       authority = JSON.parse(authorityString);
     }
   } catch (e) {
@@ -41,14 +43,52 @@ export function getAuthority(str?: string): string | string[] {
   return authority;
 }
 
-export function setAuthority(authority: string | string[]): void {
-  // const proAuthority = typeof authority === 'string' ? [authority] : authority;
-  // localStorage.setItem('antd-pro-authority', JSON.stringify(proAuthority));
-  // // auto reload
-  // reloadAuthorized();
+// export function setAuthority(authority: string | string[]): void {
+//   // const proAuthority = typeof authority === 'string' ? [authority] : authority;
+//   // localStorage.setItem('antd-pro-authority', JSON.stringify(proAuthority));
+//   // // auto reload
+//   // reloadAuthorized();
+//
+//   const proAuthority = typeof authority === 'string' ? [authority] : authority;
+//   localStorage.setItem('rolename', JSON.stringify(proAuthority));
+//   // auto reload
+//   reloadAuthorized();
+// }
+
+export function setAuthority(authority: string | string[],ttl: number): void {
 
   const proAuthority = typeof authority === 'string' ? [authority] : authority;
-  localStorage.setItem('rolename', JSON.stringify(proAuthority));
+  setWithExpiry('rolename', JSON.stringify(proAuthority),ttl);
   // auto reload
   reloadAuthorized();
+}
+
+function setWithExpiry(key:string, value:string, ttl:number) {
+  const now = new Date()
+
+  // `item` is an object which contains the original value
+  // as well as the time when it's supposed to expire
+  const item = {
+    value: value,
+    expiry: now.getTime() + ttl
+  }
+  localStorage.setItem(key, JSON.stringify(item))
+}
+
+function getWithExpiry(key:string) {
+  const itemStr = localStorage.getItem(key)
+  // if the item doesn't exist, return null
+  if (!itemStr) {
+    return null
+  }
+  const item = JSON.parse(itemStr)
+  const now = new Date()
+  // compare the expiry time of the item with the current time
+  if (now.getTime() > item.expiry) {
+    // If the item is expired, delete the item from storage
+    // and return null
+    localStorage.removeItem(key)
+    return null
+  }
+  return item.value
 }

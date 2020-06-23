@@ -80,8 +80,12 @@ const Model: LoginModelType = {
         const {rolename = ''} = decode;
         console.log(rolename);
 
-        // 更新Authority
-        setAuthority(rolename);
+        if (payload.autoLogin) {
+          // 更新Authority
+          setAuthority(rolename,604800000);
+        } else {
+          setAuthority(rolename,900000);
+        }
 
         let { redirect } = params as { redirect: string };
         if (redirect) {
