@@ -30,14 +30,22 @@ const codeMessage = {
 const errorHandler = (error: { response: Response }): Response => {
   const { response } = error;
   if (response && response.status) {
-    const errorText = codeMessage[response.status] || response.statusText;
-    // const { status, url } = response;
+    if(response.status == 401) {
+      notification.error({
+        // message: `请求错误 ${status}: ${url}`,
+        message:  `请先登陆`,
+        description: '用户没有权限（令牌、用户名、密码错误）。',
+      });
+    } else {
+      const errorText = codeMessage[response.status] || response.statusText;
+      // const { status, url } = response;
 
-    notification.error({
-      // message: `请求错误 ${status}: ${url}`,
-      message:  `请求错误`,
-      description: errorText,
-    });
+      notification.error({
+        // message: `请求错误 ${status}: ${url}`,
+        message: `发生错误`,
+        description: errorText,
+      });
+    }
   } else if (!response) {
     notification.error({
       description: '您的网络发生异常，无法连接服务器',

@@ -26,9 +26,15 @@ const ScheduleOption: React.FC<{}> = () => {
       <FormItem
         name="schedule"
         label="选择时间"
+        rules={[{required: true ,message: '请选择时间'}]}
       >
         <Select size="large">
           {data.length > 0 ? data.map((item:itemVal) => {
+            if(item.description == '当前为假期暂不开放') {
+              return (
+                  <Option value={item.id} disabled>{item.description}</Option>
+              )
+            }
             return (
               <>
                 <Option value={item.id}>{item.description}</Option>

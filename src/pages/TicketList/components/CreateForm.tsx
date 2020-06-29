@@ -69,7 +69,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
           <FormItem
             name="title"
             label="问题概述"
-            rules={[{ required: true, max: 30,message: '请输入问题概述！' }]}
+            rules={[{ required: true, max: 30,message: '请输入不多于30字问题概述！' }]}
           >
             <Input placeholder="请输入概述" />
           </FormItem>
