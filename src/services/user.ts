@@ -25,7 +25,7 @@ export async function getuserinfo(params:any): Promise<any> {
 
 export async function updatemyinfo(params:any): Promise<any> {
   return request('/api/v1/user/updatemyinfo', {
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }
@@ -34,7 +34,7 @@ export async function updatemyinfo(params:any): Promise<any> {
 
 export async function changepassword(params:any): Promise<any> {
   return request('/api/v1/user/changepassword', {
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }

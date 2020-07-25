@@ -26,20 +26,21 @@ export async function getalltickets(params?: TableListParams):Promise<any> {
 }
 
 export async function getmyticket(params?: TableListParams):Promise<any> {
-  return request('/api/v1/ticket/getmyticket', {
+  return request('/api/v1/ticket/getmywork', {
     params,
   })
 }
 
 export async function acceptticket(params?: TableListParams):Promise<any> {
   return request('/api/v1/ticket/acceptticket', {
+    method: 'PUT',
     params,
   })
 }
 
 export async function finishticket(params?: TableListParams):Promise<any> {
   return request('/api/v1/ticket/finishticket', {
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }

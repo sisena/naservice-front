@@ -23,7 +23,7 @@ export async function addpermission(params?: permissionListParams):Promise<any> 
 
 export async function updatepermission(params?: permissionListParams):Promise<any> {
   return request('/api/v1/permission/updatepermission', {
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }
@@ -54,7 +54,7 @@ export async function addclass(params?: classListParams):Promise<any> {
 
 export async function updateclass(params?: classListParams):Promise<any> {
   return request('/api/v1/class/updateclass', {
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }
@@ -70,13 +70,14 @@ export async function deleteclass(params?: classListParams):Promise<any> {
 
 export async function addschedule(params?: scheduleListParams):Promise<any> {
   return request('/api/v1/schedule/addschedule',{
+    method: 'PUT',
     params,
   });
 }
 
 export async function updateschedule(params?: scheduleListParams):Promise<any> {
   return request('/api/v1/schedule/updateschedule', {
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }
@@ -98,7 +99,7 @@ export async function getallschedule(params?: scheduleListParams):Promise<any> {
 
 export async function updatevacation(params?: vacationListParamas):Promise<any> {
   return request('/api/v1/system/updatevacation',{
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }
@@ -122,7 +123,7 @@ export async function createann(params?: annListParams):Promise<any> {
 
 export async function updateann(params?: annListParams):Promise<any> {
   return request('/api/v1/ann/updateann',{
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }
@@ -157,7 +158,7 @@ export async function createuser(params?: usermgrListParams):Promise<any> {
 
 export async function updateuser(params?: usermgrListParams):Promise<any> {
   return request('/api/v1/usermgr/updateuser',{
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }
@@ -173,7 +174,7 @@ export async function deleteuser(params?: usermgrListParams):Promise<any> {
 
 export async function userresetpwd(params?: usermgrListParams):Promise<any> {
   return request('/api/v1/usermgr/userresetpwd',{
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }

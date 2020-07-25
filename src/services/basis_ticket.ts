@@ -18,7 +18,7 @@ export async function createticket(params?: TableListParams):Promise<any> {
 
 export async function ticketupdate(params?: TableListParams):Promise<any> {
   return request('/api/v1/ticket/ticketupdate', {
-    method: 'POST',
+    method: 'PUT',
     data: {
       ...params,
     }
