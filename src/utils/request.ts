@@ -10,8 +10,7 @@ const codeMessage = {
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
   204: '删除数据成功。',
-  // 400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
-  400: '',
+  400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
   401: '用户没有权限（令牌、用户名、密码错误）。',
   403: '用户得到授权，但是访问是被禁止的。',
   404: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
@@ -30,22 +29,13 @@ const codeMessage = {
 const errorHandler = (error: { response: Response }): Response => {
   const { response } = error;
   if (response && response.status) {
-    if(response.status == 401) {
-      notification.error({
-        // message: `请求错误 ${status}: ${url}`,
-        message:  `请先登陆`,
-        description: '用户没有权限（令牌、用户名、密码错误）。',
-      });
-    } else {
-      const errorText = codeMessage[response.status] || response.statusText;
-      // const { status, url } = response;
+    const errorText = codeMessage[response.status] || response.statusText;
+    const { status, url } = response;
 
-      notification.error({
-        // message: `请求错误 ${status}: ${url}`,
-        message: `发生错误`,
-        description: errorText,
-      });
-    }
+    notification.error({
+      message: `请求错误 ${status}: ${url}`,
+      description: errorText,
+    });
   } else if (!response) {
     notification.error({
       description: '您的网络发生异常，无法连接服务器',
