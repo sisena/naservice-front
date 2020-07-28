@@ -17,6 +17,7 @@ const TableList: React.FC<{}> = () => {
     {
       title: '编号',
       dataIndex: 'id',
+      hideInSearch: true,
     },
     {
       title: '日期',
@@ -25,11 +26,13 @@ const TableList: React.FC<{}> = () => {
     {
       title: '班次id',
       dataIndex: 'class',
+      hideInSearch: true,
     },
     {
       title: '类型',
       dataIndex: 'type',
       ellipsis: true,
+      hideInSearch: true,
       valueEnum: {
         'student': { text: '学生'},
         'teacher': { text: '老师'},
@@ -43,10 +46,12 @@ const TableList: React.FC<{}> = () => {
     {
       title: '最大容纳单数',
       dataIndex: 'maxticket',
+      hideInSearch: true,
     },
     {
       title: '已经报单数',
       dataIndex: 'hasticket',
+      hideInSearch: true,
     },
     {
       title: '操作',
@@ -111,7 +116,6 @@ const TableList: React.FC<{}> = () => {
         ]}
         request={(params) => getallschedule(params)}
         columns={columns}
-        search={false}
       />
 
       <CreateForm

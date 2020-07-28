@@ -21,10 +21,12 @@ const TableList: React.FC<{}> = () => {
     {
       title: '名字',
       dataIndex: 'name',
+      hideInSearch: true,
     },
     {
       title: '角色',
       dataIndex: 'role',
+      hideInSearch: true,
       valueEnum: {
         'admin': { text: '管理员'},
         'staff': { text: '网管'},
@@ -84,7 +86,7 @@ const TableList: React.FC<{}> = () => {
     <PageHeaderWrapper>
       <ProTable<TableListItem>
         actionRef={actionRef}
-        rowKey="uid"
+        rowKey="id"
         toolBarRender={() => [
           <Button type="primary" onClick={() => handleCreateFormVisible(true)}>
             <PlusOutlined/> 新建
@@ -92,7 +94,6 @@ const TableList: React.FC<{}> = () => {
         ]}
         request={(params) => getallpermission(params)}
         columns={columns}
-        search={false}
       />
 
       <CreateForm
