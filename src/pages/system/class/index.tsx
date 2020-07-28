@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {PageHeaderWrapper} from '@ant-design/pro-layout';
-import {Button, Popconfirm} from 'antd';
+import {Button, Popconfirm, notification} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {TableListItem} from './data';
@@ -59,12 +59,21 @@ const TableList: React.FC<{}> = () => {
           <Popconfirm
             title="确定删除?"
             onConfirm={async () => {
-              const success = await deleteclass({id: record.id});
-              if (success) {
-                if (actionRef.current) {
-                  actionRef.current.reload();
+              await deleteclass({id: record.id}).then(res => {
+                if (res.code == 204) {
+                  notification.success({
+                    message: '删除完成',
+                  })
+                  if (actionRef.current) {
+                    actionRef.current.reload();
+                  }
+                } else {
+                  notification.error({
+                    message: '发生错误',
+                    description: res.message,
+                  })
                 }
-              }
+              })
             }}
             okText="是"
             cancelText="否"
@@ -101,13 +110,22 @@ const TableList: React.FC<{}> = () => {
           handleCreateFormVisible(false)
         }}
         onSubmit={async (value) => {
-          const success = await addclass(value)
-          if (success) {
-           handleCreateFormVisible(false)
-           if (actionRef.current) {
-              actionRef.current.reload();
+          await addclass(value).then(res => {
+            if (res.code == 201) {
+              notification.success({
+                message: '添加成功',
+              })
+              handleCreateFormVisible(false)
+              if (actionRef.current) {
+                actionRef.current.reload();
               }
+            } else {
+              notification.error({
+                message: '发生错误',
+                description: res.message,
+              })
             }
+          })
         }}
       />
 
@@ -119,14 +137,23 @@ const TableList: React.FC<{}> = () => {
             setFormValues({})
           }}
           onSubmit={async (value) => {
-            const success = await updateclass(value)
-            if (success) {
-              handleUpdateFormVisible(false)
-              if (actionRef.current) {
-                actionRef.current.reload();
+            updateclass(value).then(res => {
+              if (res.code == 204) {
+                notification.success({
+                  message: '更新成功',
+                })
+                handleUpdateFormVisible(false)
+                if (actionRef.current) {
+                  actionRef.current.reload();
+                }
+                setFormValues({})
+              } else {
+                notification.error({
+                  message: '发生错误',
+                  description: res.message,
+                })
               }
-              setFormValues({})
-            }
+            })
           }}
           values={FormValues}
         />

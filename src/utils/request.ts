@@ -4,6 +4,7 @@
  */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
+import { getWithExpiry} from "@/utils/authority";
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -28,7 +29,21 @@ const codeMessage = {
  */
 const errorHandler = (error: { response: Response }): Response => {
   const { response } = error;
-  if (response && response.status) {
+  // if (response && response.status) {
+  //   const errorText = codeMessage[response.status] || response.statusText;
+  //   const { status, url } = response;
+  //
+  //   notification.error({
+  //     message: `请求错误 ${status}: ${url}`,
+  //     description: errorText,
+  //   });
+  // } else if (!response) {
+  //   notification.error({
+  //     description: '您的网络发生异常，无法连接服务器',
+  //     message: '网络异常',
+  //   });
+  // }
+  if (response && response.status && !(response.status == 401)) { //如果是401的状态码，说明没有登陆，不要抛出错误通知
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
 
@@ -55,7 +70,7 @@ const request = extend({
 
 // 如果存在token,就在头部加上
 request.interceptors.request.use( (url, options) => {
-  const token = localStorage.getItem("token"); // 取不到值时,返回的是null
+  const token = getWithExpiry("token"); // 取不到值时,返回的是null
   if (token) {
     const headers = {
       Authorization: `Bearer ${token}`,

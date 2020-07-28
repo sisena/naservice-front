@@ -104,7 +104,7 @@ const Login: React.FC<LoginProps> = (props) => {
         {/*</Tab>*/}
         <div>
           <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
-            自动登录
+            7天免登陆
           </Checkbox>
           <Link
             style={{

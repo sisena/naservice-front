@@ -80,12 +80,21 @@ const TableList: React.FC<{}> = () => {
           <Popconfirm
             title="确认删除?"
             onConfirm={async () => {
-              const success = await deleteuser({uid: record.uid})
-              if (success) {
-                if (actionRef.current) {
-                  actionRef.current.reload();
+              await deleteuser({uid: record.uid}).then(res => {
+                if (res.code == 204) {
+                  notification.success({
+                    message: '删除完成',
+                  })
+                  if (actionRef.current) {
+                    actionRef.current.reload();
+                  }
+                } else {
+                  notification.error({
+                    message: '发生错误',
+                    description: res.message,
+                  })
                 }
-              }
+              })
             }}
             okText="是"
             cancelText="否"
@@ -123,13 +132,22 @@ const TableList: React.FC<{}> = () => {
           handleCreateFormVisible(false)
         }}
         onSubmit={async (value) => {
-          const success = await createuser(value)
-          if (success) {
-            handleCreateFormVisible(false)
-            if (actionRef.current) {
-              actionRef.current.reload();
+          await createuser(value).then(res => {
+            if (res.code == 201) {
+              notification.success({
+                message: '添加成功',
+              })
+              handleCreateFormVisible(false)
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
+            } else {
+              notification.error({
+                message: '发生错误',
+                description: res.message,
+              })
             }
-          }
+          })
         }}
       />
 
@@ -141,14 +159,23 @@ const TableList: React.FC<{}> = () => {
             setFormValues({})
           }}
           onSubmit={async (value) => {
-            const success = await updateuser(value)
-            if (success) {
-              handleUpdateFormVisible(false)
-              if (actionRef.current) {
-                actionRef.current.reload();
+            await updateuser(value).then(res => {
+              if (res.code == 204) {
+                notification.success({
+                  message: '更新成功',
+                })
+                handleUpdateFormVisible(false)
+                if (actionRef.current) {
+                  actionRef.current.reload();
+                }
+                setFormValues({})
+              } else {
+                notification.error({
+                  message: '发生错误',
+                  description: res.message,
+                })
               }
-              setFormValues({})
-            }
+            })
           }}
           values={FormValues}
           />
@@ -162,16 +189,15 @@ const TableList: React.FC<{}> = () => {
           setFormValues({})
         }}
         onSubmit={async (value) => {
-          const success = await userresetpwd(value)
-          if (success) {
-            notification.success({
-              message: '操作成功',
-              description:
-                '密码更新成功',
-            });
-            setFormValues({})
-          }
-          handlePwdchangeVisible(false)
+          await userresetpwd(value).then(res => {
+            if (res.code == 204) {
+              notification.success({
+                message: '更新成功',
+              });
+              setFormValues({})
+            }
+            handlePwdchangeVisible(false)
+          })
         }}
         values={FormValues}
       />

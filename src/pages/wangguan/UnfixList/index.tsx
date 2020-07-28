@@ -7,7 +7,7 @@ import {
   CloseCircleOutlined
 } from '@ant-design/icons';
 import {PageHeaderWrapper} from '@ant-design/pro-layout';
-import {Button, Tag} from 'antd';
+import {Button, Tag, notification} from 'antd';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {TableListItem} from '../data';
 import {getuncompletetickets, acceptticket} from "@/services/handle_ticket";
@@ -111,12 +111,21 @@ const TableList: React.FC<{}> = () => {
             type="primary"
             style={{ margin: 2 }}
             onClick={async () => {
-              const success = await acceptticket({ticketid: record.id})
-              if (success) {
-                if (actionRef.current) {
-                  actionRef.current.reload();
+              acceptticket({ticketid: record.id}).then(res => {
+                if (res.code == 204) {
+                  notification.success({
+                    message: '接单成功'
+                  })
+                  if(actionRef.current) {
+                    actionRef.current.reload();
+                  }
+                } else {
+                  notification.error({
+                    message: '发生错误',
+                    description: res.message
+                  })
                 }
-              }
+              })
             }}
           >
             接单

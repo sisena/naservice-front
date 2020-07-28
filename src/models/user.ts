@@ -56,13 +56,21 @@ const UserModel: UserModelType = {
         payload: response,
       });
     },
-    *fetchCurrent(_, { call, put }) { // 从这里获取用户信息
+    // *fetchCurrent(_, { call, put }) {
+    //   const response = yield call(queryCurrent);
+    //   yield put({
+    //     type: 'saveCurrentUser',
+    //     payload: response,
+    //   });
+    // },
+    *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
+      if (response.code == 200) {
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload: response.data,
       });
-    },
+    }},
   },
 
   reducers: {

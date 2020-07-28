@@ -121,9 +121,10 @@ const UserDetail: React.FC<UserDetailProps> = (props) => {
 
   useEffect(() => {
     getuserinfo({id: value.owner}).then(value => {
-      setUserdata(value);
+      if (value.code == 200) {
+        setUserdata(value.data);
+      }
     })
-    console.log(Userdata);
   },[])
 
   return (

@@ -29,19 +29,25 @@ const UserSetting: React.FC<InfoValsProps> = (props) => {
 
     setInfoVals({...InfoVals , ...fieldsValue});
 
-    const success =await updatemyinfo({ ...InfoVals, ...fieldsValue });
-    if (success) {
-      if (dispatch) {
-        dispatch({
-          type: 'user/fetchCurrent',
+    updatemyinfo({ ...InfoVals, ...fieldsValue }).then(res => {
+      if (res.code == 204) {
+        if (dispatch) {
+          dispatch({
+            type: 'user/fetchCurrent',
+          });
+        }
+        notification.success({
+          message: '操作成功',
+          description:
+            '更新个人信息成功',
         });
+      } else {
+        notification.error({
+          message: '更新失败',
+          description: res.message
+        })
       }
-      notification.success({
-        message: '操作成功',
-        description:
-          '更新个人信息成功',
-      });
-    }
+    })
   }
 
   const layout = {
@@ -103,14 +109,25 @@ const UserSetting: React.FC<InfoValsProps> = (props) => {
           handlePwdchangeVisible(false)
         }}
         onSubmit={async (value) => {
-          const success = await changepassword(value)
-          if (success) {
-            notification.success({
-              message: '操作成功',
-              description:
-                '密码更新成功',
-            });
-          }
+          await changepassword(value).then(res => {
+            if (res.code == 204) {
+              if (dispatch) {
+                dispatch({
+                  type: 'user/fetchCurrent',
+                });
+              }
+              notification.success({
+                message: '操作成功',
+                description:
+                  '密码更新成功',
+              });
+            } else {
+              notification.error({
+                message: '更新失败',
+                description: res.message
+              })
+            }
+          })
           handlePwdchangeVisible(false)
         }}
         />

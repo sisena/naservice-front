@@ -16,16 +16,21 @@ const Forgetpass: React.FC<{}> = () => {
     const fieldValue = await form.validateFields();
     setFormVals({...fieldValue})
     setloading(true)
-    const success = await userforget({...formVals,...fieldValue})
-    if (success) {
-      notification.success({
-        message: '操作成功',
-        description:
-          '已通过邮件方式向您发送修改密码链接,请检查myscse邮箱',
-      });
-      setloading(false)
-      history.push('/user/login');
-    }
+    await userforget({...formVals,...fieldValue}).then(res => {
+      if (res.code == 201) {
+        notification.success({
+          message: '操作成功',
+          description:
+            '已通过邮件方式向您发送修改密码链接,请检查myscse邮箱',
+        });
+        setloading(false)
+        history.push('/user/login');
+      } else {
+        notification.error({
+          message: res.message
+        })
+      }
+    })
     setloading(false)
   }
 

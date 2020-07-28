@@ -11,6 +11,7 @@ interface itemVals {
   start_time: string;
   end_time: string;
   type: string;
+  zone: string;
 }
 
 const ClassOption: React.FC<{}> = () => {
@@ -18,10 +19,11 @@ const ClassOption: React.FC<{}> = () => {
 
   useEffect(() => {
     getallclass().then(value => {
-      setdata(value.data)
+      if (value.code == 200) {
+        setdata(value.data)
+      }
     })
   }, [])
-  // console.log(data)
 
   return (
     <>
@@ -33,7 +35,7 @@ const ClassOption: React.FC<{}> = () => {
           {data.length > 0 ? data.map((item:itemVals) => {
             return (
               <>
-                <Option value={item.id}>{item.start_time}-{item.end_time} {item.type} </Option>
+                <Option value={item.id}>{item.start_time}-{item.end_time} {item.zone} </Option>
               </>
             )
           }) : () => {

@@ -16,7 +16,9 @@ const ScheduleOption: React.FC<{}> = () => {
 
   useEffect(() => {
     getavailschedules().then(value => {
-      setdata(value)
+      if (value.code == 200) {
+        setdata(value.data)
+      }
     })
   }, [])
   // console.log(data)

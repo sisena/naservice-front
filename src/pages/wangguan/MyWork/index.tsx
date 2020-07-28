@@ -7,7 +7,7 @@ import {
   CloseCircleOutlined
 } from '@ant-design/icons';
 import {PageHeaderWrapper} from '@ant-design/pro-layout';
-import {Button, Tag} from 'antd';
+import {Button, Tag, notification} from 'antd';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {TableListItem} from '../data';
 import {getmyticket, abortticket, finishticket} from "@/services/handle_ticket";
@@ -127,7 +127,6 @@ const TableList: React.FC<{}> = () => {
               onClick={() => {
                 setFormValues(record);
                 handleModalVisible(true);
-                console.log(FormValues);
               }}
             >
               消单
@@ -146,12 +145,21 @@ const TableList: React.FC<{}> = () => {
               type="dashed"
               style={{ margin: 2 }}
               onClick={async () => {
-                const success = await abortticket({ticketid: record.id})
-                if (success) {
-                  if (actionRef.current) {
-                    actionRef.current.reload();
+                await abortticket({ticketid: record.id}).then(res => {
+                  if (res.code == 204) {
+                    notification.success({
+                      message: '成功取消'
+                    })
+                    if(actionRef.current) {
+                      actionRef.current.reload();
+                    }
+                  } else {
+                    notification.error({
+                      message: '发生错误',
+                      description: res.message
+                    })
                   }
-                }
+                })
               }}
             >
               取消
@@ -188,14 +196,23 @@ const TableList: React.FC<{}> = () => {
             setFormValues({});
           }}
           onSubmit={async (value) => {
-            const success = await finishticket(value)
-            if (success) {
-              handleModalVisible(false);
-              if (actionRef.current) {
-                actionRef.current.reload();
+            await finishticket(value).then(res => {
+              if (res.code == 204) {
+                notification.success({
+                  message: '消单完成'
+                })
+                handleModalVisible(false);
+                if(actionRef.current) {
+                  actionRef.current.reload();
+                }
+                setFormValues({});
+              } else {
+                notification.error({
+                  message: '发生错误',
+                  description: res.message
+                })
               }
-              setFormValues({});
-            }
+            })
           }}
           values={FormValues}
         />

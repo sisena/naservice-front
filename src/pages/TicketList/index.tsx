@@ -126,14 +126,23 @@ const TableList: React.FC<{}> = () => {
           }
           {(record.status == '未完成') ?
             <Popconfirm
-              title="确定删除?"
+              title="确定取消?"
               onConfirm={async () => {
-                const success = await cancelticket({ticketid: record.id})
-                if (success) {
-                  if (actionRef.current) {
-                    actionRef.current.reload();
+                await cancelticket({ticketid: record.id}).then(res => {
+                  if (res.code == 204) {
+                    notification.success({
+                      message: '取消完成',
+                    })
+                    if (actionRef.current) {
+                      actionRef.current.reload();
+                    }
+                  } else {
+                    notification.error({
+                      message: '发生错误',
+                      description: res.message,
+                    })
                   }
-                }
+                })
               }}
               okText="是"
               cancelText="否"
@@ -176,19 +185,23 @@ const TableList: React.FC<{}> = () => {
 
       <CreateForm
         onSubmit={async (value) => {
-          const success = await createticket(value);
-          if (success) {
-            handleModalVisible(false);
-            setStepFormValues({});
-            if (actionRef.current) {
-              actionRef.current.reload();
+          await createticket(value).then(res => {
+            if (res.code == 201) {
+              notification.success({
+                message: '创建成功',
+              })
+              handleModalVisible(false);
+              setStepFormValues({});
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
+            } else {
+              notification.error({
+                message: '发生错误',
+                description: res.message,
+              })
             }
-            notification.success({
-              message: '创建成功',
-              description:
-                '',
-            });
-          }
+          })
         }}
         onCancel={() => {
           handleModalVisible(false);
@@ -201,14 +214,23 @@ const TableList: React.FC<{}> = () => {
       {stepFormValues && Object.keys(stepFormValues).length ? (
         <UpdateForm
           onSubmit={async (value) => {
-            const success = await ticketupdate(value);
-            if (success) {
-              handleUpdateModalVisible(false);
-              setStepFormValues({});
-              if (actionRef.current) {
-                actionRef.current.reload();
+            await ticketupdate(value).then(res => {
+              if (res.code == 204) {
+                notification.success({
+                  message: '更新成功',
+                })
+                handleUpdateModalVisible(false);
+                setStepFormValues({});
+                if (actionRef.current) {
+                  actionRef.current.reload();
+                }
+              } else {
+                notification.error({
+                  message: '发生错误',
+                  description: res.message,
+                })
               }
-            }
+            })
           }}
           onCancel={() => {
             handleUpdateModalVisible(false);

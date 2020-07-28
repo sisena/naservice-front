@@ -3,6 +3,9 @@ import { Form, Button,  Input, Modal, Steps } from 'antd';
 
 import { TableListItem } from '../data';
 import ScheduleOption from "@/pages/TicketList/components/ScheduleOption";
+import {connect} from "umi";
+import {ConnectState} from "@/models/connect";
+import {ConnectProps, CurrentUser} from "@@/plugin-dva/connect";
 
 export interface FormValueType extends Partial<TableListItem> {
   description?: string;
@@ -13,12 +16,14 @@ export interface FormValueType extends Partial<TableListItem> {
   title?: string;
 }
 
-export interface CreateFormProps {
+export interface CreateFormProps extends ConnectProps{
   onCancel: (flag?: boolean, formVals?: FormValueType) => void;
   onSubmit: (values: FormValueType) => void;
   createModalVisible: boolean;
   values: Partial<TableListItem>;
+  currentUser?: CurrentUser
 }
+
 const FormItem = Form.Item;
 const { Step } = Steps;
 const { TextArea } = Input;
@@ -34,17 +39,22 @@ const formLayout = {
 };
 
 const CreateForm: React.FC<CreateFormProps> = (props) => {
-  const [formVals, setFormVals] = useState<FormValueType>({});
-  const [currentStep, setCurrentStep] = useState<number>(0);
-
-  const [form] = Form.useForm();
-
   const {
     onSubmit: handleCreate,
     onCancel: handleModalVisible,
     createModalVisible,
     values,
+    currentUser
   } = props;
+
+  const [formVals, setFormVals] = useState<FormValueType>({
+    name: currentUser?.name,
+    destination: currentUser?.Address
+  });
+
+  const [currentStep, setCurrentStep] = useState<number>(0);
+
+  const [form] = Form.useForm();
 
   const forward = () => setCurrentStep(currentStep + 1);
 
@@ -172,6 +182,10 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       <Form
         {...formLayout}
         form={form}
+        initialValues={{
+          name: formVals.name,
+          destination: formVals.destination
+        }}
       >
         {renderContent()}
       </Form>
@@ -179,4 +193,6 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
   );
 };
 
-export default CreateForm;
+export default connect(({ user }: ConnectState) => ({
+  currentUser: user.currentUser
+}))(CreateForm);

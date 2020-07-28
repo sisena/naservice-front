@@ -17,7 +17,14 @@ const vacationsetting: React.FC<{}> = () => {
 
   useEffect(() => {
     getvacation().then(value => {
-      setInfoVals(value)
+      if (value.code == 200) {
+        setInfoVals(value.data)
+      } else {
+        notification.error({
+          message: '发生错误',
+          description: value.message
+        });
+      }
     })
   },[])
 
@@ -28,14 +35,18 @@ const vacationsetting: React.FC<{}> = () => {
 
     setInfoVals({...InfoVals , ...fieldsValue});
 
-    const success =await updatevacation({ ...InfoVals, ...fieldsValue });
-    if (success) {
-      notification.success({
-        message: '操作成功',
-        description:
-          '更新假期设置成功',
-      });
-    }
+    await updatevacation({ ...InfoVals, ...fieldsValue }).then(res => {
+      if (res.code == 204) {
+        notification.success({
+          message: '更新成功',
+        })
+      } else {
+        notification.error({
+          message: '更新失败',
+          description: res.message
+        })
+      }
+    })
   }
 
   const layout = {

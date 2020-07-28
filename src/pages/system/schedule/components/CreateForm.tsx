@@ -25,14 +25,13 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
 
   const submit = async () => {
     const fieldsValue = await form.getFieldsValue();
-    // console.log(str)
+
     setFormVals({...formVals , ...fieldsValue });
-    //console.log({ ...formVals,  ...fieldsValue,date: DateVals });
+
     onSubmit({ ...formVals, ...fieldsValue, date: DateVals });
   }
 
   const formatDate = (date:any, dateString:any) => {
-    console.log(dateString);
     setDateVals(dateString)
   }
 

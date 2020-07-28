@@ -32,9 +32,9 @@ const CompleteForm: React.FC<CompleteFormProps> = (props) => {
     for (let v of fieldsValue.reply) {
       str = str + v + '';
     }
-    // console.log(str)
+
     setFormVals({...formVals , reply: str});
-    // console.log({ ...formVals, reply: str });
+
     onSubmit({ ...formVals, reply: str });
   }
 

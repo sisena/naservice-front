@@ -63,7 +63,7 @@ export function setAuthority(authority: string | string[],ttl: number): void {
   reloadAuthorized();
 }
 
-function setWithExpiry(key:string, value:string, ttl:number) {
+export function setWithExpiry(key:string, value:string, ttl:number) { //设置一个过期时间为ttl的localstorage
   const now = new Date()
 
   // `item` is an object which contains the original value
@@ -75,7 +75,7 @@ function setWithExpiry(key:string, value:string, ttl:number) {
   localStorage.setItem(key, JSON.stringify(item))
 }
 
-function getWithExpiry(key:string) {
+export function getWithExpiry(key:string) { //获取一个没有过期的localstorage
   const itemStr = localStorage.getItem(key)
   // if the item doesn't exist, return null
   if (!itemStr) {

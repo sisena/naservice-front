@@ -6,6 +6,9 @@ import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 // @ts-ignore
 import jwt_decode from 'jwt-decode'
+import { notification } from 'antd';
+import { setWithExpiry } from "@/utils/authority";
+
 export interface StateType {
   status?: 'ok' | 'error';
   type?: string;
@@ -71,20 +74,18 @@ const Model: LoginModelType = {
           const urlParams = new URL(window.location.href);
           const params = getPageQuery();
 
-        console.log(response)
-        // 存储token
-        localStorage.setItem("token", response.token);
-
-        // 解析token
+        // 解析token抽出rolename
         const decode = jwt_decode(response.token);
         const {rolename = ''} = decode;
-        console.log(rolename);
 
         if (payload.autoLogin) {
           // 更新Authority
-          setAuthority(rolename,604800000);
+          setAuthority(rolename,10080000); //7天
+          // 存储token
+          setWithExpiry("token", response.token,10080000);
         } else {
-          setAuthority(rolename,900000);
+          setAuthority(rolename,900000); //15分钟
+          setWithExpiry("token", response.token,900000);
         }
 
         let { redirect } = params as { redirect: string };
@@ -101,6 +102,14 @@ const Model: LoginModelType = {
           }
         }
         history.replace(redirect || '/');
+      }
+      // Login failed
+      if (response.status == 401) {
+        notification.error({
+          message: '登陆失败',
+          description:
+            '用户名或密码错误',
+        })
       }
     },
 

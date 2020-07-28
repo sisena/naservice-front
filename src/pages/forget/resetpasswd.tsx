@@ -13,23 +13,28 @@ class Resetpasswd extends React.Component<any> {
   };
 
   componentDidMount() {
-    checkforget({token: this.state.token.token}).then(value => {
+    checkforget({token: this.state.token.token}).then(res => {
       this.setState({
-        valid: value
+        valid: res.data.valid
       })
     })
   }
 
   onFinish = (values:any) => {
-    const success = resetpassword({...values,token: this.state.token.token});
-    if (success) {
-      notification.success({
-        message: '操作成功',
-        description:
-          '密码重置成功',
-      });
-      history.push('/user/login');
-    }
+    resetpassword({...values,token: this.state.token.token}).then(res => {
+      if (res.code == 200) {
+        notification.success({
+          message: '操作成功',
+          description:
+            '密码重置成功',
+        });
+        history.push('/user/login');
+      } else {
+        notification.error({
+          message: '重置失败，请联系客服'
+        })
+      }
+    })
   };
 
   render() {
@@ -38,7 +43,7 @@ class Resetpasswd extends React.Component<any> {
     const {TabPane} = Tabs;
 
     if (valid.valid == 'false') {
-      return <Result status="warning" title="重置链接已过期，请重新使用忘记密码"/>
+      return <Result status="warning" title="重置链接已过期，请重新发起忘记密码"/>
     }
 
     if (valid.valid == 'true') {
