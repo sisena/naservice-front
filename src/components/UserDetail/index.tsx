@@ -136,6 +136,7 @@ const UserDetail: React.FC<UserDetailProps> = (props) => {
         closable={false}
         onClose={() => onClose()}
         visible={UserDrawVisible}
+        destroyOnClose
       >
         <p>学号:{Userdata.uid}</p>
         <p>姓名:{Userdata.name}</p>
