@@ -35,3 +35,9 @@ export async function cancelticket(params?: TableListParams):Promise<any> {
 export async function getavailschedules():Promise<any> {
   return request('/api/v1/schedule/getavailschedules')
 }
+
+export async function ticketdetail(params?: TableListParams):Promise<any> {
+  return request('/api/v1/ticket/ticketdetail',{
+    params
+  })
+}

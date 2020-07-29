@@ -14,11 +14,16 @@ import {TableListItem} from './data';
 import {getmyhistory, createticket, ticketupdate, cancelticket} from "@/services/basis_ticket";
 import CreateForm from "@/pages/TicketList/components/CreateForm";
 import UpdateForm from "@/pages/TicketList/components/UpdateForm";
+import TicketDetail from "@/components/TicketDetail";
+
 
 const TableList: React.FC<{}> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false); //创建报修的表单是否显示
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
+  const [TicketDetailVisible, handleTicketDetailVisible] = useState<boolean>(false);
+  const [TicketDetailVal, setTicketDetailVal] = useState({})
+
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
     {
@@ -163,6 +168,14 @@ const TableList: React.FC<{}> = () => {
               删除
             </Button>
           }
+          <Button
+            style={{ margin: 2 }}
+            onClick={() => {
+              handleTicketDetailVisible(true)
+              setTicketDetailVal(record)
+            }}>
+            详细信息
+          </Button>
         </>
       )
     }
@@ -240,6 +253,16 @@ const TableList: React.FC<{}> = () => {
           values={stepFormValues}
         />
       ) : null}
+
+      {TicketDetailVal && Object.keys(TicketDetailVal).length ? (<TicketDetail
+        value={TicketDetailVal}
+        TicketDetailVisible={TicketDetailVisible}
+        onClose={() => {
+          handleTicketDetailVisible(false)
+          setTicketDetailVal({})
+        }}
+      />): null }
+
     </PageHeaderWrapper>
   )
 }

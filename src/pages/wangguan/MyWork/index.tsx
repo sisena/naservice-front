@@ -13,12 +13,17 @@ import {TableListItem} from '../data';
 import {getmyticket, abortticket, finishticket} from "@/services/handle_ticket";
 import CompleteForm from '@/pages/wangguan/MyWork/components/CompleteForm'
 import UserDetail from "@/components/UserDetail";
+import TicketDetail from "@/components/TicketDetail";
+
 
 const TableList: React.FC<{}> = () => {
   const [ModalVisible, handleModalVisible] = useState<boolean>(false);
   const [UserDrawVisible, handleUserDrawVisible] = useState<boolean>(false);
   const [FormValues, setFormValues] = useState({});
   const [DetailVal, setDetailVal] = useState({});
+  const [TicketDetailVisible, handleTicketDetailVisible] = useState<boolean>(false);
+  const [TicketDetailVal, setTicketDetailVal] = useState({})
+
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
     {
@@ -173,6 +178,14 @@ const TableList: React.FC<{}> = () => {
               取消
             </Button>
           }
+          <Button
+            style={{ margin: 2 }}
+            onClick={() => {
+              handleTicketDetailVisible(true)
+              setTicketDetailVal(record)
+            }}>
+            详细信息
+          </Button>
         </>
       )
     }
@@ -226,6 +239,15 @@ const TableList: React.FC<{}> = () => {
         UserDrawVisible={UserDrawVisible}
         value={DetailVal}
         />): null }
+
+      {TicketDetailVal && Object.keys(TicketDetailVal).length ? (<TicketDetail
+        value={TicketDetailVal}
+        TicketDetailVisible={TicketDetailVisible}
+        onClose={() => {
+          handleTicketDetailVisible(false)
+          setTicketDetailVal({})
+        }}
+      />): null }
 
     </PageHeaderWrapper>
   )

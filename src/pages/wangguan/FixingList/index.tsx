@@ -7,15 +7,18 @@ import {
   CloseCircleOutlined
 } from '@ant-design/icons';
 import {PageHeaderWrapper} from '@ant-design/pro-layout';
-import {Tag} from 'antd';
+import {Button, Tag} from 'antd';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {TableListItem} from '../data';
 import {getfixingtickets} from "@/services/handle_ticket";
 import UserDetail from "@/components/UserDetail";
+import TicketDetail from "@/components/TicketDetail";
 
 const TableList: React.FC<{}> = () => {
   const [UserDrawVisible, handleUserDrawVisible] = useState<boolean>(false);
   const [DetailVal, setDetailVal] = useState({});
+  const [TicketDetailVisible, handleTicketDetailVisible] = useState<boolean>(false);
+  const [TicketDetailVal, setTicketDetailVal] = useState({})
 
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
@@ -105,6 +108,23 @@ const TableList: React.FC<{}> = () => {
           </Tag>
         )
       }
+    },
+    {
+      title: '操作',
+      dataIndex: 'option',
+      valueType: 'option',
+      render: (_, record) => (
+        <>
+          <Button
+            style={{ margin: 2 }}
+            onClick={() => {
+              handleTicketDetailVisible(true)
+              setTicketDetailVal(record)
+            }}>
+            详细信息
+          </Button>
+        </>
+      )
     }
   ];
 
@@ -125,6 +145,15 @@ const TableList: React.FC<{}> = () => {
         }}
         UserDrawVisible={UserDrawVisible}
         value={DetailVal}
+      />): null }
+
+      {TicketDetailVal && Object.keys(TicketDetailVal).length ? (<TicketDetail
+        value={TicketDetailVal}
+        TicketDetailVisible={TicketDetailVisible}
+        onClose={() => {
+          handleTicketDetailVisible(false)
+          setTicketDetailVal({})
+        }}
       />): null }
 
     </PageHeaderWrapper>
