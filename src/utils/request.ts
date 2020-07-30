@@ -5,6 +5,7 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 import { getWithExpiry} from "@/utils/authority";
+import { history } from 'umi';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -18,6 +19,7 @@ const codeMessage = {
   406: '请求的格式不可得。',
   410: '请求的资源被永久删除，且不会再得到的。',
   422: '当创建一个对象时，发生一个验证错误。',
+  429: '您的请求次数过多，请在稍后重试',
   500: '服务器发生错误，请检查服务器。',
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
@@ -43,6 +45,10 @@ const errorHandler = (error: { response: Response }): Response => {
   //     message: '网络异常',
   //   });
   // }
+  if (response.status == 401) { //401状态码可能是jwt过期，推回登陆界面
+    history.push('/user/login');
+  }
+
   if (response && response.status && !(response.status == 401)) { //如果是401的状态码，说明没有登陆，不要抛出错误通知
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
