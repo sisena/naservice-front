@@ -148,7 +148,7 @@ const UserDetail: React.FC<UserDetailProps> = (props) => {
 
         <ProTable<TableListItem>
           rowKey="key"
-          request={() => getpeoplehistory({uid: Userdata.uid})}
+          request={() => getpeoplehistory({uid: value.owner})}
           columns={columns}
           search={false}
         />
