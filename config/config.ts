@@ -33,7 +33,7 @@ export default defineConfig({
         {
           name: 'login',
           path: '/user/login',
-          component: './user/login',
+          component: './login/index',
         },
         {
           name: 'forget',
