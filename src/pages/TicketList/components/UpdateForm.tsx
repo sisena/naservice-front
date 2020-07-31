@@ -85,9 +85,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <FormItem
             name="description"
             label="问题描述"
-            rules={[{ required: true, max: 100, message: '请输入至少三个字符的问题描述！', min: 3 }]}
           >
-            <TextArea rows={4} placeholder="请输入至少五个字符" />
+            <TextArea rows={4}/>
           </FormItem>
         </>
       );
