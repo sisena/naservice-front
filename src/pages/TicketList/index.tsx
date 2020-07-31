@@ -27,7 +27,7 @@ const TableList: React.FC<{}> = () => {
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
     {
-      title: '预约时间',
+      title: '上门时间',
       width: 300,
       dataIndex: 'schedule',
     },

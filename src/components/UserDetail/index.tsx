@@ -41,7 +41,7 @@ const UserDetail: React.FC<UserDetailProps> = (props) => {
   });
   const columns: ProColumns<any>[] = [
     {
-      title: '预约时间',
+      title: '上门时间',
       width: 300,
       dataIndex: 'schedule',
     },

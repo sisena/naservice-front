@@ -27,7 +27,7 @@ const ScheduleOption: React.FC<{}> = () => {
     <>
       <FormItem
         name="schedule"
-        label="选择时间"
+        label="选择上门时间"
         rules={[{required: true ,message: '请选择时间'}]}
       >
         <Select size="large">

@@ -177,7 +177,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       <Steps style={{ marginBottom: 28 }} size="small" current={currentStep}>
         <Step title="基本信息" />
         <Step title="问题描述" />
-        <Step title="选择时间" />
+        <Step title="上门时间" />
       </Steps>
       <Form
         {...formLayout}
