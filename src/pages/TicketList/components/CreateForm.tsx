@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button,  Input, Modal, Steps } from 'antd';
-
 import { TableListItem } from '../data';
 import ScheduleOption from "@/pages/TicketList/components/ScheduleOption";
 import {connect} from "umi";

@@ -11,7 +11,7 @@ import {Button, Tag, notification} from 'antd';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {TableListItem} from '../data';
 import {getmyticket, abortticket, finishticket} from "@/services/handle_ticket";
-import CompleteForm from '@/pages/wangguan/MyWork/components/CompleteForm'
+import CompleteForm from './components/CompleteForm'
 import UserDetail from "@/components/UserDetail";
 import TicketDetail from "@/components/TicketDetail";
 

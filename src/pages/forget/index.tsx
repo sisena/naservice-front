@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, Input, Tabs, notification } from 'antd';
 import { history } from 'umi';
 import { userforget } from '@/services/user';
-import styles from '@/pages/forget/index.less';
+import styles from './index.less';
 import { getcaptcha } from '@/services/other';
 
 const { TabPane } = Tabs;

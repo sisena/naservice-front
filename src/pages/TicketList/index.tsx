@@ -12,8 +12,8 @@ import {Button, Tag, Popconfirm,notification} from 'antd';
 import ProTable, {ProColumns, ActionType} from '@ant-design/pro-table';
 import {TableListItem} from './data';
 import {getmyhistory, createticket, ticketupdate, cancelticket} from "@/services/basis_ticket";
-import CreateForm from "@/pages/TicketList/components/CreateForm";
-import UpdateForm from "@/pages/TicketList/components/UpdateForm";
+import CreateForm from "./components/CreateForm";
+import UpdateForm from "./components/UpdateForm";
 import TicketDetail from "@/components/TicketDetail";
 
 

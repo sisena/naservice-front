@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Modal, Form, Input} from 'antd';
-import {TableListItem} from "@/pages/system/usermgr/data";
+import {TableListItem} from "../data";
 
 const FormItem = Form.Item;
 

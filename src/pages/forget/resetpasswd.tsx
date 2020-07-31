@@ -2,7 +2,7 @@ import React from 'react';
 import {Tabs, Spin, Result, Form, Input,Button,notification} from 'antd';
 import { history } from 'umi';
 import {checkforget,resetpassword} from "@/services/user";
-import styles from "@/pages/forget/index.less";
+import styles from "./index.less";
 
 class Resetpasswd extends React.Component<any> {
   state = {
