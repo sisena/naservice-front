@@ -51,10 +51,12 @@ const errorHandler = (error: { response: Response }): Response => {
 
   if (response && response.status && !(response.status == 401)) { //如果是401的状态码，说明没有登陆，不要抛出错误通知
     const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
+    // const { status, url } = response;
+    const { status } = response;
 
     notification.error({
-      message: `请求错误 ${status}: ${url}`,
+      // message: `请求错误 ${status}: ${url}`,
+      message: `请求错误 ${status}`,
       description: errorText,
     });
   } else if (!response) {
