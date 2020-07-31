@@ -196,6 +196,7 @@ const TableList: React.FC<{}> = () => {
         search={false}
       />
 
+      // @ts-ignore
       <CreateForm
         onSubmit={async (value) => {
           await createticket(value).then(res => {
