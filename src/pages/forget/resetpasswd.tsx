@@ -14,9 +14,11 @@ class Resetpasswd extends React.Component<any> {
 
   componentDidMount() {
     checkforget({token: this.state.token.token}).then(res => {
-      this.setState({
-        valid: res.data.valid
-      })
+      if (res.code == 200) {
+        this.setState({
+          valid: res.data
+        })
+      }
     })
   }
 
