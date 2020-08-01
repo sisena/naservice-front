@@ -14,7 +14,7 @@ const Hello: React.FC<{}> = () => {
   const [Announcement, setAnnouncement] = useState([]);
   useEffect(() => {
     getann().then(value => {
-      setAnnouncement(value)
+      setAnnouncement(value.data)
     })
   },[])
 
