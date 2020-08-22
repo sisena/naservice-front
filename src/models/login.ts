@@ -1,6 +1,5 @@
 import { stringify } from 'querystring';
 import { history, Reducer, Effect } from 'umi';
-
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
@@ -80,11 +79,11 @@ const Model: LoginModelType = {
 
         if (payload.autoLogin) {
           // 更新Authority
-          setAuthority(rolename,10080000); //7天
+          setAuthority(rolename,10080000); // 7天
           // 存储token
           setWithExpiry("token", response.token,10080000);
         } else {
-          setAuthority(rolename,900000); //15分钟
+          setAuthority(rolename,900000); // 15分钟
           setWithExpiry("token", response.token,900000);
         }
 

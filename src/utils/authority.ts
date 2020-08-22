@@ -1,36 +1,35 @@
 import { reloadAuthorized } from './Authorized';
 
 // use localStorage to store the authority info, which might be sent from server in actual project.
-export function getAuthority(str?: string): string | string[] {
-  // const authorityString =
-  //   typeof str === 'undefined' && localStorage ? localStorage.getItem('antd-pro-authority') : str;
-  // // authorityString could be admin, "admin", ["admin"]
-  // let authority;
-  // try {
-  //   if (authorityString) {
-  //     authority = JSON.parse(authorityString);
-  //   }
-  // } catch (e) {
-  //   authority = authorityString;
-  // }
-  // if (typeof authority === 'string') {
-  //   return [authority];
-  // }
-  // // preview.pro.ant.design only do not use in your production.
-  // // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
-  // if (!authority && ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
-  //   return ['admin'];
-  // }
-  // return authority;
+// export function getAuthority(str?: string): string | string[] {
+//   const authorityString =
+//     typeof str === 'undefined' && localStorage ? localStorage.getItem('antd-pro-authority') : str;
+//   // authorityString could be admin, "admin", ["admin"]
+//   let authority;
+//   try {
+//     if (authorityString) {
+//       authority = JSON.parse(authorityString);
+//     }
+//   } catch (e) {
+//     authority = authorityString;
+//   }
+//   if (typeof authority === 'string') {
+//     return [authority];
+//   }
+//   // preview.pro.ant.design only do not use in your production.
+//   // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+//   if (!authority && ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
+//     return ['admin'];
+//   }
+//   return authority;
+// }
 
-  const authorityString =
-    // typeof str === 'undefined' && localStorage ? getWithExpiry('rolename') : str;
-     getWithExpiry('rolename');
+export function getAuthority(): string | string[] {
+  const authorityString = getWithExpiry('rolename');
   // authorityString could be admin, "admin", ["admin"]
   let authority;
   try {
     if (authorityString) {
-      // @ts-ignore
       authority = JSON.parse(authorityString);
     }
   } catch (e) {
@@ -44,13 +43,8 @@ export function getAuthority(str?: string): string | string[] {
 }
 
 // export function setAuthority(authority: string | string[]): void {
-//   // const proAuthority = typeof authority === 'string' ? [authority] : authority;
-//   // localStorage.setItem('antd-pro-authority', JSON.stringify(proAuthority));
-//   // // auto reload
-//   // reloadAuthorized();
-//
 //   const proAuthority = typeof authority === 'string' ? [authority] : authority;
-//   localStorage.setItem('rolename', JSON.stringify(proAuthority));
+//   localStorage.setItem('antd-pro-authority', JSON.stringify(proAuthority));
 //   // auto reload
 //   reloadAuthorized();
 // }
@@ -63,19 +57,19 @@ export function setAuthority(authority: string | string[],ttl: number): void {
   reloadAuthorized();
 }
 
-export function setWithExpiry(key:string, value:string, ttl:number) { //设置一个过期时间为ttl的localstorage
+export function setWithExpiry(key:string, value:string, ttl:number) { // 设置一个过期时间为ttl的localstorage
   const now = new Date()
 
   // `item` is an object which contains the original value
   // as well as the time when it's supposed to expire
   const item = {
-    value: value,
+    value,
     expiry: now.getTime() + ttl
   }
   localStorage.setItem(key, JSON.stringify(item))
 }
 
-export function getWithExpiry(key:string) { //获取一个没有过期的localstorage
+export function getWithExpiry(key:string) { // 获取一个没有过期的localstorage
   const itemStr = localStorage.getItem(key)
   // if the item doesn't exist, return null
   if (!itemStr) {
