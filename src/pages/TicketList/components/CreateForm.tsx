@@ -180,6 +180,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       <Form
         {...formLayout}
         form={form}
+        preserve={false}
         initialValues={{
           name: formVals.name,
           destination: formVals.destination

@@ -42,6 +42,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
     >
       <Form
       form={form}
+      preserve={false}
       initialValues={{
         type: "student"
       }}

@@ -180,6 +180,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       <Form
         {...formLayout}
         form={form}
+        preserve={false}
         initialValues={{
           description: formVals.description,
           destination: formVals.destination,

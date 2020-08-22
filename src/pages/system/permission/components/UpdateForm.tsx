@@ -47,6 +47,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     >
       <Form
         form={form}
+        preserve={false}
         initialValues={{
           uid: formVals.uid,
           role: formVals.role,

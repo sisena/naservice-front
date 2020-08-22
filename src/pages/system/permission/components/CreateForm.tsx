@@ -41,6 +41,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       onOk={() => submit()}
     >
       <Form
+      preserve={false}
       form={form}
       >
         <FormItem name="uid" label="学号" rules={[{ required: true, max: 20, message: '请输入学号！' }]}>

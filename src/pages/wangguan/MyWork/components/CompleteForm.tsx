@@ -49,6 +49,7 @@ const CompleteForm: React.FC<CompleteFormProps> = (props) => {
       onOk={() => submit()}
     >
       <Form
+      preserve={false}
       form={form}
       >
         <FormItem name="reply" label="回复" rules={[{ required: true,message: '请输入回复内容！' }]}>

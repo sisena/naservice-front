@@ -41,6 +41,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       onOk={() => submit()}
     >
       <Form
+      preserve={false}
       form={form}
       initialValues={{
         type: "student"

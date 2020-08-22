@@ -50,6 +50,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     >
       <Form
         form={form}
+        preserve={false}
         initialValues={{
           id: formVals.id,
           descript: formVals.descript,
