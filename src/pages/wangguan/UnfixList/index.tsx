@@ -1,8 +1,5 @@
 import React, {useRef, useState} from 'react';
 import {
-  CheckCircleOutlined,
-  SyncOutlined,
-  ExclamationCircleOutlined,
   ClockCircleOutlined,
   CloseCircleOutlined
 } from '@ant-design/icons';
@@ -74,27 +71,6 @@ const TableList: React.FC<{}> = () => {
           return (
             <Tag icon={<ClockCircleOutlined/>} color="default">
               等待维修
-            </Tag>
-          )
-        }
-        if (record.status === '维修完成') {
-          return (
-            <Tag icon={<CheckCircleOutlined/>} color="success">
-              维修完成
-            </Tag>
-          )
-        }
-        if (record.status === '正在维修') {
-          return (
-            <Tag icon={<SyncOutlined spin/>} color="processing">
-              正在维修
-            </Tag>
-          )
-        }
-        if (record.status === '机主取消') {
-          return (
-            <Tag icon={<ExclamationCircleOutlined/>} color="warning">
-              您已取消
             </Tag>
           )
         }

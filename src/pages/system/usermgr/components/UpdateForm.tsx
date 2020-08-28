@@ -68,9 +68,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           Address: formVals.Address,
         }}
       >
-        <FormItem name="uid" label="学号/工号" rules={[{ required: true, max: 20,message: '请输入学号/工号！' }]}>
-          <Input />
-        </FormItem>
         <FormItem name="name" label="真实姓名" rules={[{ required: true,  max: 10,message: '请输入真实名字！' }]}>
           <Input />
         </FormItem>

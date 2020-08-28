@@ -43,12 +43,15 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       <Form
       preserve={false}
       form={form}
+      initialValues={{
+        role: 'staff'
+      }}
       >
         <FormItem name="uid" label="学号" rules={[{ required: true, max: 20, message: '请输入学号！' }]}>
           <Input />
         </FormItem>
         <FormItem name="role" label="权限">
-          <Select defaultValue='staff'>
+          <Select>
           <Option value="staff">网管</Option>
           <Option value="admin">管理员</Option>
           </Select>

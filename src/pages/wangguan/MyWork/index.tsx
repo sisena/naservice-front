@@ -108,7 +108,7 @@ const TableList: React.FC<{}> = () => {
         if (record.status === '机主取消') {
           return (
             <Tag icon={<ExclamationCircleOutlined/>} color="warning">
-              您已取消
+              机主取消
             </Tag>
           )
         }

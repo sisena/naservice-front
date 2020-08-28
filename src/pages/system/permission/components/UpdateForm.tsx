@@ -57,7 +57,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Input />
         </FormItem>
         <FormItem name="role" label="权限">
-          <Select defaultValue='staff'>
+          <Select>
             <Option value="staff">网管</Option>
             <Option value="admin">管理员</Option>
           </Select>
