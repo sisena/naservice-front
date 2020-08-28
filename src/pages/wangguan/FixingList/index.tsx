@@ -28,6 +28,7 @@ const TableList: React.FC<{}> = () => {
       title: '联系人',
       dataIndex: 'name',
       ellipsis: true,
+      hideInSearch: true,
       render: (name,record) => <a onClick={() => {
         handleUserDrawVisible(true)
         setDetailVal(record)
@@ -40,6 +41,7 @@ const TableList: React.FC<{}> = () => {
       title: '类型',
       dataIndex: 'type',
       ellipsis: true,
+      hideInSearch: true,
       valueEnum: {
         'student': { text: '学生'},
         'teacher': { text: '老师'},
@@ -65,11 +67,13 @@ const TableList: React.FC<{}> = () => {
     {
       title: '维修人',
       dataIndex: 'staff',
+      hideInSearch: true,
       ellipsis: true,
     },
     {
       title: '状态',
       dataIndex: 'status',
+      hideInSearch: true,
       render: (_, record) => {
         if (record.status === '正在维修') {
           return (
@@ -111,7 +115,6 @@ const TableList: React.FC<{}> = () => {
         rowKey="id"
         request={(params) => getfixingtickets(params)}
         columns={columns}
-        search={false}
       />
 
       {DetailVal && Object.keys(DetailVal). length ? (<UserDetail
