@@ -125,7 +125,7 @@ const TableList: React.FC<{}> = () => {
       valueType: 'option',
       render: (_, record) => (
         <>
-          {(record.status == '正在维修') ?
+          {(record.status === '正在维修') ?
             <Button
               type="primary"
               style={{ margin: 2 }}
@@ -145,7 +145,7 @@ const TableList: React.FC<{}> = () => {
               消单
             </Button>
           }
-          {(record.status == '正在维修') ?
+          {(record.status === '正在维修') ?
             <Button
               type="dashed"
               style={{ margin: 2 }}
@@ -210,7 +210,7 @@ const TableList: React.FC<{}> = () => {
           }}
           onSubmit={async (value) => {
             await finishticket(value).then(res => {
-              if (res.code == 204) {
+              if (res.code === 204) {
                 notification.success({
                   message: '消单完成'
                 })

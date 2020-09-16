@@ -125,13 +125,13 @@ const TableList: React.FC<{}> = () => {
       valueType: 'option',
       render: (_, record) => (
         <>
-          {(record.status == '未完成') ?
+          {(record.status === '未完成') ?
             <Button
               type="primary"
               style={{ margin: 2 }}
               onClick={async () => {
                 await acceptticket({ticketid: record.id}).then(res => {
-                  if (res.code == 204) {
+                  if (res.code === 204) {
                     notification.success({
                       message: '接单成功'
                     })
