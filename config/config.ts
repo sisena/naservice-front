@@ -119,7 +119,7 @@ export default defineConfig({
                   path: '/service/allticket',
                   name: 'allticket',
                   icon: 'UnorderedListOutlined',
-                  component: './wangguan/AllticketList',
+                  component: './wangguan/AllTicketList',
                   authority: ['admin','staff'],
                 },
                 {
@@ -169,7 +169,7 @@ export default defineConfig({
                   path: '/system/vacation',
                   name: 'vacation',
                   icon: 'HourglassOutlined',
-                  component: './system/vacationSetting',
+                  component: './system/VacationSetting',
                   authority: ['admin'],
                 },
                 {
