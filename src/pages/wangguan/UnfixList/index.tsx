@@ -28,7 +28,6 @@ const TableList: React.FC<{}> = () => {
     {
       title: '联系人',
       dataIndex: 'name',
-      hideInSearch: true,
       ellipsis: true,
       render: (name, record) => <a onClick={() => {
         handleUserDrawVisible(true)
