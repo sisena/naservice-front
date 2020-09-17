@@ -14,7 +14,7 @@ class Resetpasswd extends React.Component<any> {
 
   componentDidMount() {
     checkforget({token: this.state.token.token}).then(res => {
-      if (res.code == 200) {
+      if (res.code === '200') {
         this.setState({
           valid: res.data
         })
@@ -24,7 +24,7 @@ class Resetpasswd extends React.Component<any> {
 
   onFinish = (values:any) => {
     resetpassword({...values,token: this.state.token.token}).then(res => {
-      if (res.code == 200) {
+      if (res.code === '200') {
         notification.success({
           message: '操作成功',
           description:
@@ -44,11 +44,11 @@ class Resetpasswd extends React.Component<any> {
     const FormItem = Form.Item;
     const {TabPane} = Tabs;
 
-    if (valid.valid == 'false') {
+    if (valid.valid === 'false') {
       return <Result status="warning" title="重置链接已过期，请重新发起忘记密码"/>
     }
 
-    if (valid.valid == 'true') {
+    if (valid.valid === 'true') {
       return (
         <div className={styles.main}>
           <Tabs className={styles.tab}>
@@ -82,7 +82,7 @@ class Resetpasswd extends React.Component<any> {
       )
     }
 
-    if (valid.valid == 'invalid') {
+    if (valid.valid === 'invalid') {
       return (
         <Result status="error" title="无效重置链接"/>
       )

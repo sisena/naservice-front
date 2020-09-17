@@ -73,7 +73,7 @@ const TableList: React.FC<{}> = () => {
             title="此操作只是为了删除错误的手动新建，该日未到达依然会自动创建，确认删除?"
             onConfirm={async () => {
               await deleteschedule({id: record.id}).then(res => {
-                if (res.code == 204) {
+                if (res.code === '204') {
                   notification.success({
                     message: '删除完成',
                   })
@@ -125,7 +125,7 @@ const TableList: React.FC<{}> = () => {
         }}
         onSubmit={async (value) => {
           await addschedule(value).then(res => {
-            if (res.code == 201) {
+            if (res.code === '201') {
               notification.success({
                 message: '添加成功',
               })
@@ -152,7 +152,7 @@ const TableList: React.FC<{}> = () => {
           }}
           onSubmit={async (value) => {
             await updateschedule(value).then(res => {
-              if (res.code == 204) {
+              if (res.code === '204') {
                 notification.success({
                   message: '更新成功',
                 })

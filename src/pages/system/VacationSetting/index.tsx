@@ -17,7 +17,7 @@ const vacationsetting: React.FC<{}> = () => {
 
   useEffect(() => {
     getvacation().then(value => {
-      if (value.code == 200) {
+      if (value.code === '200') {
         setInfoVals(value.data)
       } else {
         notification.error({
@@ -36,7 +36,7 @@ const vacationsetting: React.FC<{}> = () => {
     setInfoVals({...InfoVals , ...fieldsValue});
 
     await updatevacation({ ...InfoVals, ...fieldsValue }).then(res => {
-      if (res.code == 204) {
+      if (res.code === '204') {
         notification.success({
           message: '更新成功',
         })

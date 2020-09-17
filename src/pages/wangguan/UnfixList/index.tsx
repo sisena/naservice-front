@@ -93,7 +93,7 @@ const TableList: React.FC<{}> = () => {
             style={{ margin: 2 }}
             onClick={async () => {
               acceptticket({ticketid: record.id}).then(res => {
-                if (res.code == 204) {
+                if (res.code === '204') {
                   notification.success({
                     message: '接单成功'
                   })

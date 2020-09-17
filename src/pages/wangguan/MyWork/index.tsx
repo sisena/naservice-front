@@ -151,7 +151,7 @@ const TableList: React.FC<{}> = () => {
               style={{ margin: 2 }}
               onClick={async () => {
                 await abortticket({ticketid: record.id}).then(res => {
-                  if (res.code == 204) {
+                  if (res.code === '204') {
                     notification.success({
                       message: '成功取消'
                     })
@@ -210,7 +210,7 @@ const TableList: React.FC<{}> = () => {
           }}
           onSubmit={async (value) => {
             await finishticket(value).then(res => {
-              if (res.code === 204) {
+              if (res.code === '204') {
                 notification.success({
                   message: '消单完成'
                 })

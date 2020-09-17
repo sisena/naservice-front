@@ -60,7 +60,7 @@ const TableList: React.FC<{}> = () => {
             title="确定删除?"
             onConfirm={async () => {
               await deleteclass({id: record.id}).then(res => {
-                if (res.code == 204) {
+                if (res.code === '204') {
                   notification.success({
                     message: '删除完成',
                   })
@@ -111,7 +111,7 @@ const TableList: React.FC<{}> = () => {
         }}
         onSubmit={async (value) => {
           await addclass(value).then(res => {
-            if (res.code == 201) {
+            if (res.code === '201') {
               notification.success({
                 message: '添加成功',
               })
@@ -138,7 +138,7 @@ const TableList: React.FC<{}> = () => {
           }}
           onSubmit={async (value) => {
             updateclass(value).then(res => {
-              if (res.code == 204) {
+              if (res.code === '204') {
                 notification.success({
                   message: '更新成功',
                 })

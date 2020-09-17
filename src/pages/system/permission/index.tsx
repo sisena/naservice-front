@@ -52,7 +52,7 @@ const TableList: React.FC<{}> = () => {
               title="确定删除?"
               onConfirm={async () => {
                 await deletepermission({id: record.uid}).then(res => {
-                  if (res.code == 204) {
+                  if (res.code === '204') {
                     notification.success({
                       message: '删除完成',
                     })
@@ -101,7 +101,7 @@ const TableList: React.FC<{}> = () => {
         onCancel={() => {handleCreateFormVisible(false)}}
         onSubmit={async (value) => {
           await addpermission(value).then(res => {
-            if (res.code == 201) {
+            if (res.code === '201') {
               notification.success({
                 message: '添加成功',
               })
@@ -127,7 +127,7 @@ const TableList: React.FC<{}> = () => {
           }}
           onSubmit={async (value) => {
             await updatepermission(value).then(res => {
-              if (res.code == 204) {
+              if (res.code === '204') {
                 notification.success({
                   message: '更新成功',
                 })

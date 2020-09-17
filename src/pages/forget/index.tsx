@@ -36,7 +36,7 @@ const Forgetpass: React.FC<{}> = () => {
     setFormVals({ ...fieldValue });
     setloading(true);
     await userforget({ ...formVals, ...fieldValue, CaptchaId: CapthchaData.id }).then((res) => {
-      if (res.code == 201) {
+      if (res.code === '201') {
         notification.success({
           message: '操作成功',
           description: '已通过邮件方式向您发送修改密码链接,请检查myscse邮箱',
@@ -80,7 +80,7 @@ const Forgetpass: React.FC<{}> = () => {
                 src={CapthchaData.b64s}
                 onClick={() => {
                   getcaptcha().then((res) => {
-                    if (res.code == 200) {
+                    if (res.code === '200') {
                       setCaptchaData(res.data);
                     } else {
                       notification.error({

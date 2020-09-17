@@ -81,7 +81,7 @@ const TableList: React.FC<{}> = () => {
             title="确认删除?"
             onConfirm={async () => {
               await deleteuser({uid: record.uid}).then(res => {
-                if (res.code == 204) {
+                if (res.code === '204') {
                   notification.success({
                     message: '删除完成',
                   })
@@ -133,7 +133,7 @@ const TableList: React.FC<{}> = () => {
         }}
         onSubmit={async (value) => {
           await createuser(value).then(res => {
-            if (res.code == 201) {
+            if (res.code === '201') {
               notification.success({
                 message: '添加成功',
               })
@@ -160,7 +160,7 @@ const TableList: React.FC<{}> = () => {
           }}
           onSubmit={async (value) => {
             await updateuser(value).then(res => {
-              if (res.code == 204) {
+              if (res.code === '204') {
                 notification.success({
                   message: '更新成功',
                 })
@@ -190,7 +190,7 @@ const TableList: React.FC<{}> = () => {
         }}
         onSubmit={async (value) => {
           await userresetpwd(value).then(res => {
-            if (res.code == 204) {
+            if (res.code === '204') {
               notification.success({
                 message: '更新成功',
               });

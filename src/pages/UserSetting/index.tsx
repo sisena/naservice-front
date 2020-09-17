@@ -30,7 +30,7 @@ const UserSetting: React.FC<InfoValsProps> = (props) => {
     setInfoVals({...InfoVals , ...fieldsValue});
 
     updatemyinfo({ ...InfoVals, ...fieldsValue }).then(res => {
-      if (res.code == 204) {
+      if (res.code === '204') {
         if (dispatch) {
           dispatch({
             type: 'user/fetchCurrent',
@@ -110,7 +110,7 @@ const UserSetting: React.FC<InfoValsProps> = (props) => {
         }}
         onSubmit={async (value) => {
           await changepassword(value).then(res => {
-            if (res.code == 204) {
+            if (res.code === '204') {
               if (dispatch) {
                 dispatch({
                   type: 'user/fetchCurrent',
