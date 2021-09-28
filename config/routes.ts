@@ -19,10 +19,16 @@
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
+    path: '/Hello',
+    name: '你好',
     icon: 'smile',
-    component: './Welcome',
+    component: './Hello',
+  },
+  {
+    path: '/ticket',
+    name: '我的报修',
+    icon: 'smile',
+    component: './TicketList',
   },
   {
     path: '/admin',
@@ -50,7 +56,7 @@
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/Hello',
   },
   {
     component: './404',
