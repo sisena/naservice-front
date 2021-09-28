@@ -8,20 +8,11 @@ import { login } from '@/services/NA/login';
 import styles from './index.less';
 import { setWithExpiry } from '@/services/NA/utils';
 import jwt_decode from 'jwt-decode';
+import { getuserinfo } from '@/services/NA/user';
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
-  const { initialState, setInitialState } = useModel('@@initialState');
-
-  const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.();
-    if (userInfo) {
-      await setInitialState((s) => ({
-        ...s,
-        currentUser: userInfo,
-      }));
-    }
-  };
+  const { setInitialState } = useModel('@@initialState');
 
   const handleSubmit = async (values: API.LoginParams) => {
     setSubmitting(true);
@@ -41,7 +32,9 @@ const Login: React.FC = () => {
           setWithExpiry('rolename', rolename, 900000); // 15分钟
           setWithExpiry('token', msg.token, 900000);
         }
-        await fetchUserInfo();
+
+        const userInfo = await getuserinfo();
+        await setInitialState({ currentUser: userInfo.data });
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;
         const { query } = history.location;
@@ -51,6 +44,7 @@ const Login: React.FC = () => {
       }
       // 如果失败去设置用户错误信息
     } catch (error) {
+      console.log(error);
       message.error('登录失败，请重试！');
     }
     setSubmitting(false);
