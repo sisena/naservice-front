@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Form, Input, Button, Card, notification, Select, Skeleton, Alert } from 'antd';
+import { Form, Button, Card, notification, Select, Skeleton, Alert, DatePicker } from 'antd';
 import { getvacation, updatevacation } from '@/services/NA/system';
+import moment from 'moment/moment';
 
 const { Option } = Select;
 const FormItem = Form.Item;
+const { RangePicker } = DatePicker;
 
 export interface vacationinfo {
   vacation?: string;
@@ -14,6 +16,7 @@ export interface vacationinfo {
 
 const Vacationsetting: React.FC<{}> = () => {
   const [InfoVals, setInfoVals] = useState<vacationinfo>({});
+  const [DatePickVals, setDatePickVals] = useState<any>({});
 
   useEffect(() => {
     getvacation().then((value) => {
@@ -33,9 +36,19 @@ const Vacationsetting: React.FC<{}> = () => {
   const infosubmit = async () => {
     const fieldsValue = await form.validateFields();
 
-    setInfoVals({ ...InfoVals, ...fieldsValue });
+    setInfoVals({
+      ...InfoVals,
+      ...fieldsValue,
+      vacationstart: DatePickVals[0],
+      vacationend: DatePickVals[1],
+    });
 
-    await updatevacation({ ...InfoVals, ...fieldsValue }).then((res) => {
+    await updatevacation({
+      ...InfoVals,
+      ...fieldsValue,
+      vacationstart: DatePickVals[0],
+      vacationend: DatePickVals[1],
+    }).then((res) => {
       if (res.code === '204') {
         notification.success({
           message: '更新成功',
@@ -48,6 +61,12 @@ const Vacationsetting: React.FC<{}> = () => {
       }
     });
   };
+
+  const handleDataPick = (date: any, dataString: any) => {
+    setDatePickVals(dataString);
+  };
+
+  const dateFormat = 'YYYY-MM-DD';
 
   const layout = {
     labelCol: { span: 7 },
@@ -74,8 +93,6 @@ const Vacationsetting: React.FC<{}> = () => {
             form={form}
             initialValues={{
               vacation: InfoVals.vacation,
-              vacationstart: InfoVals.vacationstart,
-              vacationend: InfoVals.vacationend,
             }}
           >
             <FormItem name="vacation" label="假期模式是否开启">
@@ -84,19 +101,15 @@ const Vacationsetting: React.FC<{}> = () => {
                 <Option value="false">关闭</Option>
               </Select>
             </FormItem>
-            <FormItem
-              name="vacationstart"
-              rules={[{ required: true, max: 20, message: '请输入正确格式！' }]}
-              label="开始时间"
-            >
-              <Input placeholder="eg: 2020-03-13" />
-            </FormItem>
-            <FormItem
-              name="vacationend"
-              rules={[{ required: true, max: 20, message: '请输入正确格式！' }]}
-              label="结束时间"
-            >
-              <Input placeholder="eg: 2020-06-20" />
+            <FormItem label="选择时间">
+              <RangePicker
+                defaultValue={[
+                  moment(InfoVals.vacationstart, dateFormat),
+                  moment(InfoVals.vacationend, dateFormat),
+                ]}
+                format={dateFormat}
+                onChange={handleDataPick}
+              />
             </FormItem>
             <FormItem {...tailLayout} label="" colon={false}>
               <Button type="primary" onClick={infosubmit}>
