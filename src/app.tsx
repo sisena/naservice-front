@@ -4,8 +4,10 @@ import type { RunTimeLayoutConfig } from 'umi';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import { getuserinfo } from '@/services/NA/user';
+import type { RequestConfig } from '@@/plugin-request/request';
+import { getWithExpiry } from '@/services/NA/utils';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -25,7 +27,7 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser();
+      const msg = await getuserinfo();
       return msg.data;
     } catch (error) {
       history.push(loginPath);
@@ -34,7 +36,8 @@ export async function getInitialState(): Promise<{
   };
   // 如果是登录页面，不执行
   if (history.location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();
+    const msg = await getuserinfo();
+    const currentUser = msg.data;
     return {
       fetchUserInfo,
       currentUser,
@@ -80,4 +83,27 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // unAccessible: <div>unAccessible</div>,
     ...initialState?.settings,
   };
+};
+
+// 拦截器,加上jwt的token
+const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
+  const token = getWithExpiry('token');
+  console.log(token);
+  if (token) {
+    const authHeader = { Authorization: `Bearer ${token}` };
+    return {
+      url: `${url}`,
+      options: { ...options, interceptors: true, headers: authHeader },
+    };
+  }
+
+  return {
+    url: url,
+    options: options,
+  };
+};
+
+export const request: RequestConfig = {
+  // 新增自动添加AccessToken的请求前拦截器
+  requestInterceptors: [authHeaderInterceptor],
 };
