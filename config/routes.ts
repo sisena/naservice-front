@@ -34,6 +34,7 @@
     path: '/service',
     name: '网管页',
     icon: 'HomeOutlined',
+    access: 'canWangguan',
     routes: [
       {
         path: '/service/unfix',
@@ -66,6 +67,7 @@
     path: '/system',
     name: '管理页',
     icon: 'SettingOutlined',
+    access: 'canSystem',
     routes: [
       {
         path: '/system/permission',
