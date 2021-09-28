@@ -31,6 +31,38 @@
     component: './TicketList',
   },
   {
+    path: '/service',
+    name: '网管页',
+    icon: 'HomeOutlined',
+    routes: [
+      {
+        path: '/service/unfix',
+        name: '未维修',
+        component: './wangguan/UnfixList',
+      },
+      {
+        path: '/service/fixing',
+        name: '正在维修',
+        component: './wangguan/FixingList',
+      },
+      {
+        path: '/service/fixcomplete',
+        name: '维修完成',
+        component: './wangguan/FixcompleteList',
+      },
+      {
+        path: '/service/allticket',
+        name: '所有维修单',
+        component: './wangguan/AllTicketList',
+      },
+      {
+        path: '/service/mywork',
+        name: '我的工作',
+        component: './wangguan/MyWork',
+      },
+    ],
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
