@@ -100,6 +100,12 @@
     ],
   },
   {
+    name: '用户设置',
+    icon: 'UserOutlined',
+    path: '/usersetting',
+    component: './UserSetting',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
