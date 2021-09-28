@@ -63,6 +63,43 @@
     ],
   },
   {
+    path: '/system',
+    name: '管理页',
+    icon: 'SettingOutlined',
+    routes: [
+      {
+        path: '/system/permission',
+        name: '权限',
+        component: './system/permission',
+      },
+      {
+        path: '/system/class',
+        name: '班次',
+        component: './system/class',
+      },
+      {
+        path: '/system/schedule',
+        name: '计划班次',
+        component: './system/schedule',
+      },
+      {
+        path: '/system/ann',
+        name: '公告',
+        component: './system/announcement',
+      },
+      {
+        path: '/system/vacation',
+        name: '假期设置',
+        component: './system/VacationSetting',
+      },
+      {
+        path: '/system/usermgr',
+        name: '用户管理',
+        component: './system/usermgr',
+      },
+    ],
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
