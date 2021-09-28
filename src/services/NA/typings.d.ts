@@ -8,7 +8,7 @@ declare namespace NAAPI {
     nickname?: string;
     email?: string;
     gender?: string;
-    address?: string;
+    Address?: string;
     phone?: string;
   };
 
