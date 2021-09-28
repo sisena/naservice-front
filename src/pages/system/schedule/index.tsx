@@ -5,14 +5,22 @@ import { PlusOutlined } from '@ant-design/icons';
 import ProTable from '@ant-design/pro-table';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import type { TableListItem } from './data';
-import { getallschedule, addschedule, updateschedule, deleteschedule } from '@/services/NA/system';
+import {
+  getallschedule,
+  addschedule,
+  updateschedule,
+  deleteschedule,
+  refreshschedule,
+} from '@/services/NA/system';
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
+import PreviewSchedule from '@/pages/system/schedule/components/PreviewSchedules';
 
 const TableList: React.FC<{}> = () => {
   const [FormValues, setFormValues] = useState({});
   const [UpdateFormVisible, handleUpdateFormVisible] = useState<boolean>(false);
   const [CreateFormVisible, handleCreateFormVisible] = useState<boolean>(false);
+  const [PreviewVisible, handlePreviewVisible] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
     {
@@ -91,6 +99,16 @@ const TableList: React.FC<{}> = () => {
     },
   ];
 
+  const refreshschedulehandle = async () => {
+    await refreshschedule().then((msg) => {
+      if (msg.code === '200') {
+        notification.success({
+          message: '刷新成功',
+        });
+      }
+    });
+  };
+
   return (
     <PageHeaderWrapper>
       <Alert
@@ -105,6 +123,12 @@ const TableList: React.FC<{}> = () => {
         toolBarRender={() => [
           <Button type="primary" onClick={() => handleCreateFormVisible(true)}>
             <PlusOutlined /> 新建
+          </Button>,
+          <Button type="primary" onClick={() => refreshschedulehandle()}>
+            刷新报修时间段
+          </Button>,
+          <Button type="primary" onClick={() => handlePreviewVisible(true)}>
+            预览报修时间段
           </Button>,
         ]}
         request={(params) => getallschedule(params)}
@@ -133,6 +157,13 @@ const TableList: React.FC<{}> = () => {
               });
             }
           });
+        }}
+      />
+
+      <PreviewSchedule
+        modalVisible={PreviewVisible}
+        onCancel={() => {
+          handlePreviewVisible(false);
         }}
       />
 

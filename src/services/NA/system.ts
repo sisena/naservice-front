@@ -180,3 +180,9 @@ export async function userresetpwd(params?: usermgrListParams): Promise<any> {
     },
   });
 }
+
+export async function refreshschedule(): Promise<any> {
+  return request('/api/v1/schedule/refreshschedules', {
+    method: 'GET',
+  });
+}
