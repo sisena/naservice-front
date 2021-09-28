@@ -15,7 +15,6 @@ const Login: React.FC = () => {
 
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
-    console.log(userInfo);
     if (userInfo) {
       await setInitialState((s) => ({
         ...s,
@@ -31,7 +30,6 @@ const Login: React.FC = () => {
       const msg = await login({ ...values });
       if (msg.code === 200) {
         message.success('登录成功！');
-        console.log(msg);
         const decode = jwt_decode(msg.token);
         const { rolename = '' } = decode;
 

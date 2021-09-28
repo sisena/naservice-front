@@ -88,7 +88,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 // 拦截器,加上jwt的token
 const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
   const token = getWithExpiry('token');
-  console.log(token);
   if (token) {
     const authHeader = { Authorization: `Bearer ${token}` };
     return {
