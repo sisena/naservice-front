@@ -5,3 +5,9 @@ export async function getuserinfo() {
     method: 'GET',
   });
 }
+
+export async function getann(): Promise<any> {
+  return request('/api/v1/ann/getann', {
+    method: 'GET',
+  });
+}
