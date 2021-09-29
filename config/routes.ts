@@ -19,6 +19,18 @@
     ],
   },
   {
+    name: '忘记密码',
+    path: '/forget',
+    component: './forget/index',
+    layout: false,
+  },
+  {
+    name: '重置密码',
+    path: '/resetpasswd',
+    component: './forget/resetpasswd',
+    layout: false,
+  },
+  {
     path: '/Hello',
     name: '你好',
     icon: 'smile',
