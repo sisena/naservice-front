@@ -121,13 +121,14 @@ const Login: React.FC = () => {
               <ProFormCheckbox noStyle name="autoLogin">
                 自动登录
               </ProFormCheckbox>
-              {/*<a*/}
-              {/*  style={{*/}
-              {/*    float: 'right',*/}
-              {/*  }}*/}
-              {/*>*/}
-              {/*  忘记密码*/}
-              {/*</a>*/}
+              <Link
+                style={{
+                  float: 'right',
+                }}
+                to="/forget"
+              >
+                忘记密码
+              </Link>
             </div>
           </ProForm>
         </div>
