@@ -22,6 +22,10 @@ const Vacationsetting: React.FC<{}> = () => {
     getvacation().then((value) => {
       if (value.code === '200') {
         setInfoVals(value.data);
+        setDatePickVals({
+          vacationstart: value.data.vacationstart,
+          vacationend: value.data.vacationend,
+        });
       } else {
         notification.error({
           message: '发生错误',
@@ -37,17 +41,17 @@ const Vacationsetting: React.FC<{}> = () => {
     const fieldsValue = await form.validateFields();
 
     setInfoVals({
-      ...InfoVals,
-      ...fieldsValue,
       vacationstart: DatePickVals[0],
       vacationend: DatePickVals[1],
+      ...InfoVals,
+      ...fieldsValue,
     });
 
     await updatevacation({
-      ...InfoVals,
-      ...fieldsValue,
       vacationstart: DatePickVals[0],
       vacationend: DatePickVals[1],
+      ...InfoVals,
+      ...fieldsValue,
     }).then((res) => {
       if (res.code === '204') {
         notification.success({
