@@ -90,6 +90,12 @@ const Vacationsetting: React.FC<{}> = () => {
           showIcon
           closable
         />
+        <Alert
+          message="假期模式只是在这几天的范围内返回空白的报修时间,管理员仍需要在计划班次将假期前几天的班次设置为0"
+          type="warning"
+          showIcon
+          closable
+        />
         <br />
         {InfoVals && Object.keys(InfoVals).length ? (
           <Form
