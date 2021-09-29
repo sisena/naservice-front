@@ -65,7 +65,7 @@ const Login: React.FC = () => {
         <div className={styles.main}>
           <ProForm
             initialValues={{
-              autoLogin: true,
+              autoLogin: false,
             }}
             submitter={{
               searchConfig: {
