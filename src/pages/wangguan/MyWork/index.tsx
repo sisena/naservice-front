@@ -47,15 +47,6 @@ const TableList: React.FC<{}> = () => {
       ),
     },
     {
-      title: '类型',
-      dataIndex: 'type',
-      ellipsis: true,
-      valueEnum: {
-        student: { text: '学生' },
-        teacher: { text: '老师' },
-      },
-    },
-    {
       title: '宿舍号',
       dataIndex: 'destination',
       ellipsis: true,
