@@ -5,7 +5,7 @@ import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
-import { getuserinfo } from '@/services/NA/user';
+import { getmyinfo } from '@/services/NA/user';
 import type { RequestConfig } from '@@/plugin-request/request';
 import { getWithExpiry } from '@/services/NA/utils';
 
@@ -27,7 +27,7 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await getuserinfo();
+      const msg = await getmyinfo();
       return msg.data;
     } catch (error) {
       history.push(loginPath);
@@ -38,7 +38,7 @@ export async function getInitialState(): Promise<{
   if (history.location.pathname !== loginPath) {
     if (history.location.pathname != '/forget') {
       if (history.location.pathname != '/resetpasswd') {
-        const msg = await getuserinfo();
+        const msg = await getmyinfo();
         const currentUser = msg.data;
         return {
           fetchUserInfo,

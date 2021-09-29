@@ -8,7 +8,7 @@ import { login } from '@/services/NA/login';
 import styles from './index.less';
 import { setWithExpiry } from '@/services/NA/utils';
 import jwt_decode from 'jwt-decode';
-import { getuserinfo } from '@/services/NA/user';
+import { getmyinfo } from '@/services/NA/user';
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -33,7 +33,7 @@ const Login: React.FC = () => {
           setWithExpiry('token', msg.token, 900000);
         }
 
-        const userInfo = await getuserinfo();
+        const userInfo = await getmyinfo();
         await setInitialState({ currentUser: userInfo.data });
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;

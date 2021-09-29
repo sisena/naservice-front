@@ -1,8 +1,15 @@
 import { request } from 'umi';
 
-export async function getuserinfo() {
+export async function getmyinfo() {
   return request('/api/v1/user/getmyinfo', {
     method: 'GET',
+  });
+}
+
+export async function getuserinfo(params: any) {
+  return request('/api/v1/user/getuserinfo', {
+    method: 'GET',
+    params,
   });
 }
 
