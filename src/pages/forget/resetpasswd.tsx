@@ -1,8 +1,9 @@
 import React from 'react';
-import { Tabs, Spin, Result, Form, Input, Button, notification } from 'antd';
+import { Spin, Result, notification } from 'antd';
 import { history } from 'umi';
 import { checkforget, resetpassword } from '@/services/NA/user';
 import styles from './index.less';
+import ProForm, { ProFormText } from '@ant-design/pro-form';
 
 class Resetpasswd extends React.Component<any> {
   state = {
@@ -40,8 +41,6 @@ class Resetpasswd extends React.Component<any> {
 
   render() {
     const { valid } = this.state;
-    const FormItem = Form.Item;
-    const { TabPane } = Tabs;
 
     if (valid.valid === 'false') {
       return <Result status="warning" title="重置链接已过期，请重新发起忘记密码" />;
@@ -50,33 +49,44 @@ class Resetpasswd extends React.Component<any> {
     if (valid.valid === 'true') {
       return (
         <div className={styles.main}>
-          <Tabs className={styles.tab}>
-            <TabPane tab="重置密码" key="reset">
-              <Form onFinish={this.onFinish}>
-                <FormItem
-                  label=""
+          <div className={styles.content}>
+            <div className={styles.main}>
+              <ProForm
+                submitter={{
+                  searchConfig: {
+                    submitText: '修改',
+                  },
+                  render: (_, dom: any) => dom.pop(),
+                  submitButtonProps: {
+                    size: 'large',
+                    style: {
+                      width: '100%',
+                    },
+                  },
+                }}
+                onFinish={async (values: any) => {
+                  await this.onFinish(values);
+                }}
+              >
+                <ProFormText.Password
                   name="password"
-                  className={styles.input}
+                  fieldProps={{
+                    size: 'large',
+                  }}
+                  placeholder="新密码"
                   rules={[{ required: true, max: 100, message: '新密码不为空!' }]}
-                >
-                  <Input.Password placeholder="新密码" />
-                </FormItem>
-                <FormItem
-                  label=""
+                />
+                <ProFormText.Password
                   name="password_again"
-                  className={styles.input}
+                  fieldProps={{
+                    size: 'large',
+                  }}
+                  placeholder="再一次新密码"
                   rules={[{ required: true, max: 100, message: '两次密码不一致!' }]}
-                >
-                  <Input.Password placeholder="再一次新密码" />
-                </FormItem>
-                <FormItem>
-                  <Button className={styles.submit} size="large" type="primary" htmlType="submit">
-                    确定
-                  </Button>
-                </FormItem>
-              </Form>
-            </TabPane>
-          </Tabs>
+                />
+              </ProForm>
+            </div>
+          </div>
         </div>
       );
     }
