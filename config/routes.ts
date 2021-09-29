@@ -22,12 +22,14 @@
     name: '忘记密码',
     path: '/forget',
     component: './forget/index',
+    hideInMenu: true,
     layout: false,
   },
   {
     name: '重置密码',
     path: '/resetpasswd',
     component: './forget/resetpasswd',
+    hideInMenu: true,
     layout: false,
   },
   {
