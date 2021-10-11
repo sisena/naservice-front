@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Form, Button, Card, notification, Select, Skeleton, Alert, DatePicker } from 'antd';
+import { Form, Button, Card, notification, Skeleton, DatePicker } from 'antd';
 import { getvacation, updatevacation } from '@/services/NA/system';
 import moment from 'moment/moment';
 
-const { Option } = Select;
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
 
 export interface vacationinfo {
-  vacation?: string;
   vacationstart?: string;
   vacationend?: string;
 }
 
-const Vacationsetting: React.FC<{}> = () => {
-  const [InfoVals, setInfoVals] = useState<vacationinfo>({});
-  const [DatePickVals, setDatePickVals] = useState<any>({});
+const Vacationsetting: React.FC = () => {
+  const [DatePickVals, setDatePickVals] = useState<any>([]);
 
   useEffect(() => {
     getvacation().then((value) => {
       if (value.code === '200') {
-        setInfoVals(value.data);
         setDatePickVals({
           vacationstart: value.data.vacationstart,
           vacationend: value.data.vacationend,
@@ -38,20 +34,9 @@ const Vacationsetting: React.FC<{}> = () => {
   const [form] = Form.useForm();
 
   const infosubmit = async () => {
-    const fieldsValue = await form.validateFields();
-
-    setInfoVals({
-      vacationstart: DatePickVals[0],
-      vacationend: DatePickVals[1],
-      ...InfoVals,
-      ...fieldsValue,
-    });
-
     await updatevacation({
       vacationstart: DatePickVals[0],
       vacationend: DatePickVals[1],
-      ...InfoVals,
-      ...fieldsValue,
     }).then((res) => {
       if (res.code === '204') {
         notification.success({
@@ -84,38 +69,14 @@ const Vacationsetting: React.FC<{}> = () => {
   return (
     <PageHeaderWrapper>
       <Card>
-        <Alert
-          message="如果当前日期距离假期结束时间少于三天时,假期模式会处于失效状态,以方便用户提前报修"
-          type="warning"
-          showIcon
-          closable
-        />
-        <Alert
-          message="假期模式只是在这几天的范围内返回空白的报修时间,管理员仍需要在计划班次将假期前几天的班次设置为0"
-          type="warning"
-          showIcon
-          closable
-        />
         <br />
-        {InfoVals && Object.keys(InfoVals).length ? (
-          <Form
-            {...layout}
-            form={form}
-            initialValues={{
-              vacation: InfoVals.vacation,
-            }}
-          >
-            <FormItem name="vacation" label="假期模式是否开启">
-              <Select>
-                <Option value="true">开启</Option>
-                <Option value="false">关闭</Option>
-              </Select>
-            </FormItem>
+        {DatePickVals && Object.keys(DatePickVals).length ? (
+          <Form {...layout} form={form}>
             <FormItem label="选择时间">
               <RangePicker
                 defaultValue={[
-                  moment(InfoVals.vacationstart, dateFormat),
-                  moment(InfoVals.vacationend, dateFormat),
+                  moment(DatePickVals.vacationstart, dateFormat),
+                  moment(DatePickVals.vacationend, dateFormat),
                 ]}
                 format={dateFormat}
                 onChange={handleDataPick}

@@ -33,7 +33,7 @@ const ScheduleOption: React.FC<{}> = () => {
         <Select size="large">
           {data.length > 0
             ? data.map((item: itemVal) => {
-                if (item.description == '当前为假期暂不开放') {
+                if (item.description == '未来5天没有报修安排') {
                   return (
                     <Option value={item.id} disabled>
                       {item.description}
