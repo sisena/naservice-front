@@ -42,6 +42,7 @@
     path: '/Statistics',
     name: '数据统计',
     icon: 'smile',
+    access: 'canWangguan',
     component: './Statistics',
   },
   {
