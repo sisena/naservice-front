@@ -39,6 +39,12 @@
     component: './Hello',
   },
   {
+    path: '/Statistics',
+    name: '数据统计',
+    icon: 'smile',
+    component: './Statistics',
+  },
+  {
     path: '/ticket',
     name: '我的报修',
     icon: 'smile',
