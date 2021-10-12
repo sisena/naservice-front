@@ -110,9 +110,9 @@
         component: './system/announcement',
       },
       {
-        path: '/system/vacation',
-        name: '假期设置',
-        component: './system/VacationSetting',
+        path: '/system/systemprop',
+        name: '杂项设置',
+        component: './system/SystemProp',
       },
       {
         path: '/system/usermgr',

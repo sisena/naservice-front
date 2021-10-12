@@ -4,7 +4,7 @@ import { TableListParams as classListParams } from '@/pages/system/class/data';
 import { TableListParams as permissionListParams } from '@/pages/system/permission/data';
 import { TableListParams as scheduleListParams } from '@/pages/system/schedule/data';
 import { TableListParams as usermgrListParams } from '@/pages/system/usermgr/data';
-import { vacationinfo as vacationListParamas } from '@/pages/system/VacationSetting';
+import { SystemPropsParams } from '@/pages/system/SystemProp';
 
 export async function getallpermission(params?: permissionListParams): Promise<any> {
   return request('/api/v1/permission/getpermission', {
@@ -97,8 +97,8 @@ export async function getallschedule(params?: scheduleListParams): Promise<any> 
   });
 }
 
-export async function updatevacation(params?: vacationListParamas): Promise<any> {
-  return request('/api/v1/system/updatevacation', {
+export async function updatesystemprop(params?: SystemPropsParams): Promise<any> {
+  return request('/api/v1/system/updatesystemprop', {
     method: 'PUT',
     data: {
       ...params,
@@ -106,8 +106,8 @@ export async function updatevacation(params?: vacationListParamas): Promise<any>
   });
 }
 
-export async function getvacation(params?: vacationListParamas): Promise<any> {
-  return request('/api/v1/system/getvacation', {
+export async function getsystemprop(params?: SystemPropsParams): Promise<any> {
+  return request('/api/v1/system/getsystemprop', {
     params,
   });
 }

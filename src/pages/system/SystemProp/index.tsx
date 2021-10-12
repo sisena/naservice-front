@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Form, Button, Card, notification, Skeleton, DatePicker } from 'antd';
-import { getvacation, updatevacation } from '@/services/NA/system';
+import { Form, Button, Card, notification, Skeleton, DatePicker, Input } from 'antd';
+import { getsystemprop, updatesystemprop } from '@/services/NA/system';
 import moment from 'moment/moment';
 
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
 
-export interface vacationinfo {
+export interface SystemPropsParams {
   vacationstart?: string;
   vacationend?: string;
+  regex?: string;
+  default_max_ticket?: string;
 }
 
-const Vacationsetting: React.FC = () => {
+const SystemProp: React.FC = () => {
   const [DatePickVals, setDatePickVals] = useState<any>([]);
+  const [PropVals, setPropVals] = useState<any>({});
 
   useEffect(() => {
-    getvacation().then((value) => {
+    getsystemprop().then((value) => {
       if (value.code === '200') {
         setDatePickVals({
           vacationstart: value.data.vacationstart,
           vacationend: value.data.vacationend,
+        });
+        setPropVals({
+          regex: value.data.regex,
+          default_max_ticket: value.data.default_max_ticket,
         });
       } else {
         notification.error({
@@ -34,9 +41,13 @@ const Vacationsetting: React.FC = () => {
   const [form] = Form.useForm();
 
   const infosubmit = async () => {
-    await updatevacation({
-      vacationstart: DatePickVals[0],
-      vacationend: DatePickVals[1],
+    const fieldsValue = await form.getFieldsValue(true);
+
+    await updatesystemprop({
+      vacationstart: DatePickVals.vacationstart,
+      vacationend: DatePickVals.vacationend,
+      regex: fieldsValue.regex,
+      default_max_ticket: fieldsValue.default_max_ticket,
     }).then((res) => {
       if (res.code === '204') {
         notification.success({
@@ -52,7 +63,10 @@ const Vacationsetting: React.FC = () => {
   };
 
   const handleDataPick = (date: any, dataString: any) => {
-    setDatePickVals(dataString);
+    setDatePickVals({
+      vacationstart: dataString[0],
+      vacationend: dataString[1],
+    });
   };
 
   const dateFormat = 'YYYY-MM-DD';
@@ -70,8 +84,28 @@ const Vacationsetting: React.FC = () => {
     <PageHeaderWrapper>
       <Card>
         <br />
-        {DatePickVals && Object.keys(DatePickVals).length ? (
-          <Form {...layout} form={form}>
+        {PropVals &&
+        Object.keys(PropVals).length &&
+        DatePickVals &&
+        Object.keys(DatePickVals).length ? (
+          <Form
+            {...layout}
+            form={form}
+            initialValues={{
+              default_max_ticket: PropVals.default_max_ticket,
+              regex: PropVals.regex,
+            }}
+          >
+            <Form.Item
+              name="default_max_ticket"
+              label="默认班次最大报修数"
+              rules={[{ required: true, message: '不能为空' }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item name="regex" label="宿舍限制正则(留空表示不做检测)">
+              <Input />
+            </Form.Item>
             <FormItem label="选择时间">
               <RangePicker
                 defaultValue={[
@@ -96,4 +130,4 @@ const Vacationsetting: React.FC = () => {
   );
 };
 
-export default Vacationsetting;
+export default SystemProp;
