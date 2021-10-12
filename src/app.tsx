@@ -38,13 +38,20 @@ export async function getInitialState(): Promise<{
   if (history.location.pathname !== loginPath) {
     if (history.location.pathname != '/forget') {
       if (history.location.pathname != '/resetpasswd') {
-        const msg = await getmyinfo();
-        const currentUser = msg.data;
-        return {
-          fetchUserInfo,
-          currentUser,
-          settings: {},
-        };
+        try {
+          const msg = await getmyinfo();
+          const currentUser = msg.data;
+          return {
+            fetchUserInfo,
+            currentUser,
+            settings: {},
+          };
+        } catch {
+          return {
+            fetchUserInfo,
+            settings: {},
+          };
+        }
       }
     }
   }
