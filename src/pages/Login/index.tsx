@@ -11,11 +11,10 @@ import jwt_decode from 'jwt-decode';
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
-  const { initialState,setInitialState } = useModel('@@initialState');
+  const { initialState, setInitialState } = useModel('@@initialState');
 
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
-    console.log(userInfo)
     if (userInfo) {
       await setInitialState((s) => ({
         ...s,
