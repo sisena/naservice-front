@@ -12,6 +12,8 @@ export interface SystemPropsParams {
   vacationend?: string;
   regexDestination?: string;
   default_max_ticket?: string;
+  regexTitle?: string;
+  regexDescription?: string;
 }
 
 const SystemProp: React.FC = () => {
@@ -28,6 +30,8 @@ const SystemProp: React.FC = () => {
         setPropVals({
           regexDestination: value.data.regexDestination,
           default_max_ticket: value.data.default_max_ticket,
+          regexTitle: value.data.regexTitle,
+          regexDescription: value.data.regexDescription,
         });
       } else {
         notification.error({
@@ -48,6 +52,8 @@ const SystemProp: React.FC = () => {
       vacationend: DatePickVals.vacationend,
       regexDestination: fieldsValue.regexDestination,
       default_max_ticket: fieldsValue.default_max_ticket,
+      regexTitle: fieldsValue.regexTitle,
+      regexDescription: fieldsValue.regexDescription,
     }).then((res) => {
       if (res.code === '204') {
         notification.success({
@@ -94,6 +100,8 @@ const SystemProp: React.FC = () => {
             initialValues={{
               default_max_ticket: PropVals.default_max_ticket,
               regexDestination: PropVals.regexDestination,
+              regexTitle: PropVals.regexTitle,
+              regexDescription: PropVals.regexDescription
             }}
           >
             <Form.Item
@@ -103,7 +111,13 @@ const SystemProp: React.FC = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item name="regexDestination" label="宿舍限制正则(留空表示不做检测)">
+            <Form.Item name="regexDestination" label="报修单宿舍限制正则(留空表示不做检测)">
+              <Input />
+            </Form.Item>
+            <Form.Item name="regexTitle" label="报修单标题限制正则(留空表示不做检测)">
+              <Input />
+            </Form.Item>
+            <Form.Item name="regexDescription" label="报修单描述限制正则(留空表示不做检测)">
               <Input />
             </Form.Item>
             <FormItem label="选择时间">
