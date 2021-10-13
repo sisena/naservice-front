@@ -10,7 +10,7 @@ const { RangePicker } = DatePicker;
 export interface SystemPropsParams {
   vacationstart?: string;
   vacationend?: string;
-  regex?: string;
+  regexDestination?: string;
   default_max_ticket?: string;
 }
 
@@ -26,7 +26,7 @@ const SystemProp: React.FC = () => {
           vacationend: value.data.vacationend,
         });
         setPropVals({
-          regex: value.data.regex,
+          regexDestination: value.data.regexDestination,
           default_max_ticket: value.data.default_max_ticket,
         });
       } else {
@@ -46,7 +46,7 @@ const SystemProp: React.FC = () => {
     await updatesystemprop({
       vacationstart: DatePickVals.vacationstart,
       vacationend: DatePickVals.vacationend,
-      regex: fieldsValue.regex,
+      regexDestination: fieldsValue.regexDestination,
       default_max_ticket: fieldsValue.default_max_ticket,
     }).then((res) => {
       if (res.code === '204') {
@@ -93,7 +93,7 @@ const SystemProp: React.FC = () => {
             form={form}
             initialValues={{
               default_max_ticket: PropVals.default_max_ticket,
-              regex: PropVals.regex,
+              regexDestination: PropVals.regexDestination,
             }}
           >
             <Form.Item
@@ -103,7 +103,7 @@ const SystemProp: React.FC = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item name="regex" label="宿舍限制正则(留空表示不做检测)">
+            <Form.Item name="regexDestination" label="宿舍限制正则(留空表示不做检测)">
               <Input />
             </Form.Item>
             <FormItem label="选择时间">
